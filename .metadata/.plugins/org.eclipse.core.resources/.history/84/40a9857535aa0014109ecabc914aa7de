@@ -1,0 +1,7 @@
+package com.iiitb.inter;
+
+public interface IBlock {
+	
+	public String expression();
+
+}

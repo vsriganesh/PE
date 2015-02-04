@@ -1,0 +1,18 @@
+package com.iiitb.utility;
+
+public class Constant {
+	
+	public static final String MODEL_INFO = "ModelInformation";
+	public static final String MODEL = "Model";
+	public static final String SYSTEM = "System";
+	public static final String BLOCK = "Block";
+	public static final String LINE = "Line";
+	
+	public static final String NAME = "Name";
+	public static final String SUB_SYS = "Subsystem";
+	public static final String PARA = "P";
+	public static final String LINE = "Line";
+	
+	
+
+}

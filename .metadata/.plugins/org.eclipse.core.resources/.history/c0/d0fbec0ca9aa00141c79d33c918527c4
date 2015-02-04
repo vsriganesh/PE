@@ -1,0 +1,41 @@
+package com.iiitb.test;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import com.iiitb.blocks.Sum;
+import com.iiitb.utility.ParseXML;
+
+public class TestFeature {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		//ParseXML.parseDocument("C:/Users/vsriganesh/Documents/MATLAB/model_code.xml");
+		Sum sum1 = new Sum("test");
+		Sum sum2 = new Sum("test1");
+		
+		ArrayList<Sum> testList = new ArrayList<Sum>();
+		
+		testList.add(sum1);
+		testList.add(sum2);
+		
+		
+		Iterator lis = testList.iterator();
+		while (lis.hasNext())
+		{
+			Sum tes = ((Sum)lis.next());
+			tes.setName("ganesh");
+			break;
+		}
+		
+		 lis = testList.iterator();
+		 while (lis.hasNext())
+			{
+				Sum tes = ((Sum)lis.next());
+				System.out.println(tes.getName());
+			}
+
+	}
+
+}

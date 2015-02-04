@@ -1,0 +1,65 @@
+package com.iiitb.blocks;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Constant block equivalent to Simulink block - Constant
+ * 
+ */
+public class Constant {
+
+	private String value;
+	private String name;
+	private Accfg accfg;
+
+	public Accfg getAccfg() {
+		return accfg;
+	}
+
+	public void setAccfg(Accfg accfg) {
+		this.accfg = accfg;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public Constant(String value) {
+
+		this.value = value;
+	}
+
+	public String expression() {
+
+		return getName() + "=" + getValue();
+	}
+
+	public Constant(String value, String name) {
+
+		setValue(value);
+
+		setName(name);
+		Accfg accfgObj = new Accfg();
+
+		accfgObj.setOutput(getName());
+		List<String> expr = new ArrayList<String>();
+		expr.add(expression());
+		accfgObj.setFp(expr);
+		setAccfg(accfgObj);
+
+	}
+
+}

@@ -1,0 +1,49 @@
+package com.iiitb.utility;
+
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import com.iiitb.blocks.Accfg;
+import com.iiitb.blocks.Block;
+
+public class MergeAccfg {
+	
+	// Perform topological sort . For now this is hardcoded
+	
+	public static Accfg merge(ArrayList<Block> blockList)
+	{
+		
+		
+		Iterator iter = blockList.iterator();
+		while(iter.hasNext())
+		{
+			Accfg merged = new Accfg();
+			List<String> fpList = new ArrayList<String>();
+			Block block = (Block)iter.next();
+			if(block.getAccfg().getInput().isEmpty())
+			{
+				fpList.addAll(block.getAccfg().getFp());
+			}
+			
+		}
+		
+		return null;
+		
+		
+		
+		
+	}
+	
+	
+	
+	public static void findInputOutputVariable()
+	{
+		
+		
+	}
+	
+	
+
+}

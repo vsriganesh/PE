@@ -1,0 +1,60 @@
+package com.iiitb.blocks;
+
+import com.iiitb.inter.IBlock;
+
+public abstract class Block implements IBlock{
+
+	private String name;
+	private String value;
+	private int sign;
+	private Accfg accfg;
+
+	public Accfg getAccfg() {
+		return accfg;
+	}
+
+	public void setAccfg(Accfg accfg) {
+		this.accfg = accfg;
+	}
+
+	public int getSign() {
+		return sign;
+	}
+
+	public void setSign(int sign) {
+		this.sign = sign;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public Block(String name) {
+		// TODO Auto-generated constructor stub
+		this.name = name;
+	}
+
+	public Block() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+
+		return getName();
+
+	}
+
+}

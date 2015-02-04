@@ -1,0 +1,20 @@
+package com.iiitb.blocks;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Sum {
+	
+	public static final Map<Integer,String> signList = new HashMap<Integer,String>();
+	
+	static{
+		
+		signList.put(1, "plusplus");
+		signList.put(1, "plusminus");
+		signList.put(1, "minusminus");
+		
+		
+	}
+	
+
+}

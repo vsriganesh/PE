@@ -1,0 +1,14 @@
+package com.iiitb.utility;
+
+import java.util.ArrayList;
+
+import com.iiitb.blocks.*;
+
+public class FetchInputFromLine {
+
+	public static void parseLine(ArrayList<Block> blockList) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

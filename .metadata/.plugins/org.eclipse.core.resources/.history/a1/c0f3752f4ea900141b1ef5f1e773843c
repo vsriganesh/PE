@@ -1,0 +1,43 @@
+package com.iiitb.blocks;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Sum {
+	
+	public static final Map<Integer,String> signList = new HashMap<Integer,String>();
+	
+	static{
+		
+		signList.put(1, "plusplus");
+		signList.put(1, "plusminus");
+		signList.put(1, "minusminus");
+		
+		
+	}
+	
+	private String input1;
+	private String input2;
+	
+	
+	public String getInput1() {
+		return input1;
+	}
+	public void setInput1(String input1) {
+		this.input1 = input1;
+	}
+	public String getInput2() {
+		return input2;
+	}
+	public void setInput2(String input2) {
+		this.input2 = input2;
+	}
+	
+	
+	public String expression()
+	{
+		
+		return (input1+"+"+input2);
+	}
+
+}
