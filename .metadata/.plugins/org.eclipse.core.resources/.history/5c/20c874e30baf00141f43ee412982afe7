@@ -1,0 +1,50 @@
+package com.iiitb.sort;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Set;
+
+import org.w3c.dom.Node;
+
+/**
+ * Sorts graph - Subsystem representation
+ * 
+ */
+public class TopologicalSort {
+
+	/**
+	 * Sorts graph (Represented in Adjacency list representation) - Topological
+	 * Sort of the subsystem
+	 * 
+	 */
+	public ArrayList<Node> sortGraph(
+			Map<String, LinkedList<String>> adjacencyList) {
+
+		Iterator keySetIter = adjacencyList.keySet().iterator();
+		ArrayList<String> rootNodes = new ArrayList<String>();
+		String key = "";
+		String rootCheck = "";
+		while (keySetIter.hasNext()) {
+			rootCheck = (String) keySetIter.next();
+			Iterator iter = adjacencyList.keySet().iterator();
+			boolean rootCheckFlag = false;
+			while (iter.hasNext()) {
+				key = (String) iter.next();
+
+				if (adjacencyList.get(key).contains(rootCheck)) {
+
+				}
+
+			}
+		}
+		// Identify root nodes
+
+		// Node should not be part of any value list
+
+		return new ArrayList<Node>();
+
+	}
+
+}
