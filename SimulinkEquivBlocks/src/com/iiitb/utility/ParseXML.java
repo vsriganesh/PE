@@ -19,13 +19,15 @@ import org.xml.sax.SAXException;
 
 import com.iiitb.blocks.Block;
 import com.iiitb.cfg.Accfg;
+import com.iiitb.constant.Constants;
+import com.iiitb.factory.BlockFactory;
 import com.iiitb.sort.TopologicalSort;
 
 public class ParseXML {
 
 	public static int countSubSystem = 0;
-	
-	public static Map<String,Accfg> subSystemMap = new HashMap<String,Accfg>();
+
+	public static Map<String, Accfg> subSystemMap = new HashMap<String, Accfg>();
 
 	// Method returns instance of xml document that can be further parsed
 	public static Document initializeDocument(String filePath) {
@@ -64,22 +66,17 @@ public class ParseXML {
 	public static Accfg parseDocument(Document doc, Node currSubSystemNode) {
 
 		List<Block> blockList = new ArrayList<Block>();
-		
-		
-		
-		
 
 		try {
 
 			// Parse XML
 
-			//NodeList blockChildNodesOfSystemNode = null;
-			//NodeList lineChildNodesOfSystemNode = null;
+			// NodeList blockChildNodesOfSystemNode = null;
+			// NodeList lineChildNodesOfSystemNode = null;
 
 			ArrayList<Node> blockChildNodesOfSystemNodeList = new ArrayList<Node>();
 			ArrayList<Node> lineChildNodesOfSystemNodeList = new ArrayList<Node>();
 
-			
 			NodeList tempForProcessing = null;
 
 			if (currSubSystemNode.getNodeName().equalsIgnoreCase(
@@ -105,10 +102,11 @@ public class ParseXML {
 
 			NodeList tempSubsystemSystemChildren = null;
 			/*
-			System.out.println(currSubSystemNode.getNodeName());
-			System.out.println(tempForProcessing.item(0));
-			System.out.println(tempForProcessing.item(1));
-			System.out.println(tempForProcessing.item(2));*/
+			 * System.out.println(currSubSystemNode.getNodeName());
+			 * System.out.println(tempForProcessing.item(0));
+			 * System.out.println(tempForProcessing.item(1));
+			 * System.out.println(tempForProcessing.item(2));
+			 */
 
 			for (int tempForProcessingIter = 0; tempForProcessingIter < tempForProcessing
 					.getLength(); tempForProcessingIter++) {
@@ -127,11 +125,10 @@ public class ParseXML {
 
 			for (int tempForProcessingIter = 0; tempForProcessingIter < tempSubsystemSystemChildren
 					.getLength(); tempForProcessingIter++) {
-				
+
 				if (tempSubsystemSystemChildren.item(tempForProcessingIter)
 						.getNodeName().equalsIgnoreCase(Constants.BLOCK)) {
 
-					
 					blockChildNodesOfSystemNodeList
 							.add(tempSubsystemSystemChildren
 									.item(tempForProcessingIter));
@@ -149,8 +146,9 @@ public class ParseXML {
 
 			}
 
-			System.out.println("Block Child "+blockChildNodesOfSystemNodeList);
-			System.out.println("Line Child "+lineChildNodesOfSystemNodeList);
+			System.out
+					.println("Block Child " + blockChildNodesOfSystemNodeList);
+			System.out.println("Line Child " + lineChildNodesOfSystemNodeList);
 
 			for (int nodeIter = 0; nodeIter < blockChildNodesOfSystemNodeList
 					.size(); nodeIter++) {
@@ -167,16 +165,16 @@ public class ParseXML {
 						// block type will be "block"
 						// block name will be (for e.g) "constant"
 						blockName = temp.item(tempIter).getNodeValue();
-						System.out.println("Block Name is : "+blockName );
+						System.out.println("Block Name is : " + blockName);
 					}
 				}
 
 				if (blockName != "" && blockType != null) {
 
 					if (blockName.equalsIgnoreCase(Constants.SUB_SYS)) {
-						
+
 						countSubSystem++;
-						
+
 						System.out.println(parseDocument(doc, blockType));
 
 					}
@@ -200,8 +198,8 @@ public class ParseXML {
 			for (int nodeIter = 0; nodeIter < lineChildNodesOfSystemNodeList
 					.size(); nodeIter++) {
 
-				System.out.println("Node Iter Value "+nodeIter);
-				
+				System.out.println("Node Iter Value " + nodeIter);
+
 				// test can be used for any testing purpose
 
 				Block test = FetchInputFromLine.parseLine(
@@ -211,20 +209,21 @@ public class ParseXML {
 
 			}
 
-			// Topological sort
-			TopologicalSort ts = new TopologicalSort();
-			ts.sortGraph(FetchInputFromLine.adjacencyList);
-			
-			/* Since we call parseDocument method in a recursive fashion for each subsystem , we clear the "adjacencyList" List.
-			 The "adjacencyList" List corresponds to individual subsystem */
-			FetchInputFromLine.adjacencyList.clear();
-			
-			System.out.println("Sort over !!!!!!!!!!!!! ");
-			
+			// FetchInputFromLine.adjacencyList.clear();
+
 			// BlockList has all blocks with ACCFG set
 			// Merge based on topological sort and Display
-			Accfg retAccfg =MergeAccfg.merge((ArrayList<Block>) blockList); 
-			subSystemMap.put("SubSystem_"+String.valueOf(countSubSystem),retAccfg);
+			Accfg retAccfg = MergeAccfg.merge((ArrayList<Block>) blockList);
+
+			/*
+			 * Since we call parseDocument method in a recursive fashion for
+			 * each subsystem , we clear the "adjacencyList" List. The
+			 * "adjacencyList" List corresponds to individual subsystem
+			 */
+			FetchInputFromLine.adjacencyList.clear();
+
+			subSystemMap.put("SubSystem_" + String.valueOf(countSubSystem),
+					retAccfg);
 			return retAccfg;
 
 		} catch (Exception e) {

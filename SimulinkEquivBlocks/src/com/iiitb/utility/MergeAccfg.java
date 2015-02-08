@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.iiitb.blocks.Block;
 import com.iiitb.cfg.Accfg;
+import com.iiitb.sort.TopologicalSort;
 
 public class MergeAccfg {
 
@@ -14,27 +15,68 @@ public class MergeAccfg {
 	public static Accfg merge(ArrayList<Block> blockList) {
 
 		Accfg merged = null;
-		List<String> fpList = null;
-		Iterator iter = blockList.iterator();
+		List<String> fpList = new ArrayList<String>();
+		
+		/* Created a new list and copied all values from blockList. This is required since we remove blockList entries during iteration.
+		 * We pass "blockListToPass" to  findInputOutputVariable method
+		 */
+		List<Block> blockListToPass = new ArrayList<Block>();
+		blockListToPass.addAll(blockList);
+		
 		merged = new Accfg();
-		fpList = new ArrayList<String>();
-		while (iter.hasNext()) {
+		
+		
+			//Topological sort 
+		  
+		
+		  TopologicalSort ts = new TopologicalSort();
+		  ArrayList<String> sortedList =
+		  ts.sortGraph(FetchInputFromLine.adjacencyList);
+		
+		
+		System.out.println("sorted List "+sortedList);
+		System.out.println("Block List "+blockList);
+		
+		
+		/*
+		 * while (iter.hasNext()) {
+		 * 
+		 * Block block = (Block) iter.next(); if
+		 * (block.getAccfg().getInput().isEmpty()) {
+		 * fpList.addAll(block.getAccfg().getFp());
+		 * 
+		 * } else continue;
+		 * 
+		 * }
+		 * 
+		 * iter = blockList.iterator(); while (iter.hasNext()) { Block block =
+		 * (Block) iter.next(); if
+		 * (block.getName().equalsIgnoreCase(Constants.SUM)) {
+		 * 
+		 * fpList.addAll(block.getAccfg().getFp());
+		 * 
+		 * }
+		 * 
+		 * }
+		 */
 
-			Block block = (Block) iter.next();
-			if (block.getAccfg().getInput().isEmpty()) {
-				fpList.addAll(block.getAccfg().getFp());
+		Iterator sortedIter = sortedList.iterator();
+		
+		String sortFp = "";
 
-			} else
-				continue;
-
-		}
-
-		iter = blockList.iterator();
-		while (iter.hasNext()) {
-			Block block = (Block) iter.next();
-			if (block.getName().equalsIgnoreCase(Constants.SUM)) {
+		while (sortedIter.hasNext()) {
+			sortFp = (String) sortedIter.next();
+			System.out.println("Test in merge1 "+sortFp);
+			Iterator iter = blockList.iterator();
+			while (iter.hasNext()) {
+				Block block = (Block) iter.next();
+				System.out.println("Test in merge2 "+block.getName());
 				
-				fpList.addAll(block.getAccfg().getFp());
+				if (block.getName().equalsIgnoreCase(sortFp)) {
+					fpList.addAll(block.getAccfg().getFp());
+					iter.remove();
+					break;
+				}
 
 			}
 
@@ -43,9 +85,9 @@ public class MergeAccfg {
 		merged.setFp(fpList);
 
 		// Call to set input and output
-		merged = findInputOutputVariable(merged, blockList);
+		merged = findInputOutputVariable(merged, (ArrayList<Block>)blockListToPass);
 
-		//System.out.println(merged);
+		// System.out.println(merged);
 		return merged;
 
 	}
@@ -59,15 +101,22 @@ public class MergeAccfg {
 
 		Iterator blockListIter = blockList.iterator();
 		while (blockListIter.hasNext()) {
+			
+		
 			Block block = (Block) blockListIter.next();
+			System.out.println("Block Name "+block.getName());
+			
 			input.addAll(block.getAccfg().getInput());
+			System.out.println("Input "+block.getAccfg().getInput());
+			
 			output.add(block.getAccfg().getOutput());
+			System.out.println("Output "+block.getAccfg().getOutput());
+			
 
 		}
-		
-		//System.out.println(input);
-		//System.out.println(output);
-		
+
+		 System.out.println("Input "+input);
+		 System.out.println("Output "+output);
 
 		Iterator inputIter = input.iterator();
 		String inputVar = "";
@@ -92,6 +141,7 @@ public class MergeAccfg {
 		}
 
 		accfg.setInput(input);
+		if(output.size()!=0)
 		accfg.setOutput(output.get(0));
 
 		return accfg;
