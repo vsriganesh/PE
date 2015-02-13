@@ -1,0 +1,51 @@
+package com.iiitb.factory;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.NodeList;
+
+import com.iiitb.blocks.Block;
+import com.iiitb.constant.Constants;
+
+public class BlockUtility {
+
+	public static Block setBlockAttributes(String blockName, NodeList attributes)
+	{
+		if (blockName.startsWith(Constants.CONST)) {
+		for (int iter = 0; iter < attributes.getLength(); iter++) {
+			//Prevent #text tag
+			if (attributes.item(iter).getNodeName() == Constants.PARA_TAG)
+
+			{
+
+				NamedNodeMap temp = attributes.item(iter).getAttributes();
+
+				for (int tempIter = 0; tempIter < temp.getLength(); tempIter++) {
+					if (temp.item(tempIter).getNodeValue()
+							.equalsIgnoreCase(Constants.VALUE)) {
+
+						block.setValue(attributes.item(iter)
+								.getTextContent());
+						
+						// Set FP based on value
+						List<String> expr = new ArrayList<String>();
+						expr.add(block.expression());
+						block.getAccfg().setFp(expr);
+						
+					}
+
+				}
+
+			}
+
+		}
+		}
+		
+		return null;
+		
+		
+	}
+	
+}

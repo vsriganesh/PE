@@ -1,0 +1,16 @@
+package com.iiitb.factory;
+
+import com.iiitb.blocks.Block;
+
+public class ConstHelper {
+	
+	public static Block setAttr()
+	{
+		
+		
+		
+		return null;
+		
+	}
+
+}

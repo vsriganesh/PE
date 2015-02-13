@@ -5,14 +5,11 @@
 <fullyQualifiedTypeName name="javax.xml.bind.Element"/>
 <fullyQualifiedTypeName name="org.w3c.dom.Element"/>
 <fullyQualifiedTypeName name="java.io.File"/>
-<fullyQualifiedTypeName name="com.iiitb.blocks.Constant"/>
 <fullyQualifiedTypeName name="com.iiitb.utility.ParseXML"/>
 <fullyQualifiedTypeName name="org.w3c.dom.NamedNodeMap"/>
 <fullyQualifiedTypeName name="com.iiitb.inter.IBlock"/>
 <fullyQualifiedTypeName name="org.w3c.dom.NodeList"/>
 <fullyQualifiedTypeName name="java.io.ObjectInputStream.GetField"/>
-<fullyQualifiedTypeName name="com.iiitb.blocks.Sum"/>
-<fullyQualifiedTypeName name="com.iiitb.blocks.Block"/>
 <fullyQualifiedTypeName name="java.security.AccessControlContext"/>
 <fullyQualifiedTypeName name="com.iiitb.blocks.Accfg"/>
 <fullyQualifiedTypeName name="com.iiitb.cfg.Accfg"/>
@@ -32,4 +29,10 @@
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.util.Set"/>
 <fullyQualifiedTypeName name="java.util.TreeSet"/>
+<fullyQualifiedTypeName name="com.iiitb.factory.BlockUtility"/>
+<fullyQualifiedTypeName name="com.iiitb.blocks.Block"/>
+<fullyQualifiedTypeName name="com.iiitb.factory.ConstHelper"/>
+<fullyQualifiedTypeName name="com.iiitb.inter.IHelper"/>
+<fullyQualifiedTypeName name="com.iiitb.blocks.Constant"/>
+<fullyQualifiedTypeName name="com.iiitb.blocks.Sum"/>
 </qualifiedTypeNameHistroy>

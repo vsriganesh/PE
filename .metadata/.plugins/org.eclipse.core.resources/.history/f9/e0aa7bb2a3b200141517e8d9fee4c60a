@@ -1,0 +1,10 @@
+package com.iiitb.factory;
+
+import org.w3c.dom.NodeList;
+
+import com.iiitb.blocks.Block;
+
+public interface Helper {
+
+	public void setAttr(NodeList attributes, int iter, Block block);
+}
