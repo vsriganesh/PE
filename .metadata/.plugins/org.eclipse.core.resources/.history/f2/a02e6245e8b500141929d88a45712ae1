@@ -43,8 +43,7 @@ public class BlockFactory {
 
 	
 	/** Method caters to Subsystem block. The instance of Accfg to be passed is computed as part of
-	 * underlying subsystem 
-	**/
+	 * underlying subsystem **/
 	
 	public static Block generateBlock(String blockName, Accfg accfg) {
 		Block block = null;

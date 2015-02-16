@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.iiitb.blocks.SubSystem&apos; to &apos;Subsystem&apos;&#x0D;&#x0A;- Original project: &apos;SimulinkEquivBlocks&apos;&#x0D;&#x0A;- Original element: &apos;com.iiitb.blocks.SubSystem&apos;&#x0D;&#x0A;- Renamed element: &apos;com.iiitb.blocks.Subsystem&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;SubSystem&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.iiitb.blocks{SubSystem.java[SubSystem" matchStrategy="1" name="Subsystem" qualified="false" references="true" similarDeclarations="false" stamp="1424096592219" textual="false" version="1.0"/>
+</session>

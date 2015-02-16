@@ -175,12 +175,7 @@ public class ParseXML {
 
 						countSubSystem++;
 
-						Accfg accfg = parseDocument(doc, blockType);
-						Block block = BlockFactory.generateBlock(blockName,
-								accfg);
-						if (block != null)
-							blockList.add(block);
-						System.out.println(accfg);
+						System.out.println(parseDocument(doc, blockType));
 
 					}
 
