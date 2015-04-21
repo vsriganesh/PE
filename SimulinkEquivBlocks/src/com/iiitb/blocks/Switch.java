@@ -2,25 +2,33 @@ package com.iiitb.blocks;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 import com.iiitb.cfg.Accfg;
 
-import expression.AddExpression;
+import expression.EqualsExpression;
 import expression.Expression;
+import expression.GreaterThanExpression;
+import expression.OrExpression;
+import expression.SwitchExpression;
 import expression.Variable;
 
-public class Sum extends Block {
+public class Switch extends Block {
 
 	public static final Map<Integer, String> signList = new HashMap<Integer, String>();
 
+	
+	// Inputs for switch
 	private Expression lhs;
 	private Expression rhs;
+	private Expression condInput;
+	
+	// Attributes captured for switch block
+	private String criteria;
+	private String threshold;
+	
+	
 
 	public Expression getLhs() {
 		return lhs;
@@ -48,20 +56,16 @@ public class Sum extends Block {
 		this.accfg = accfg;
 	}
 
-	static {
-
-		signList.put(1, "++");
-		signList.put(2, "+-");
-		signList.put(3, "--");
-
-	}
 
 	@Override
 	public void setInput(String input,String port) {
-		if (this.input1 == null || this.input1 == "") {
+		if (port.equalsIgnoreCase("1") ) {
 			setInput1(input);
 			try {
 				lhs = new Variable(input, this);
+				if(rhs!=null && condInput!=null)
+						setInputSetFlag(true);
+				
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -69,16 +73,32 @@ public class Sum extends Block {
 			}
 			// System.out.println("Input1 is set");
 
-		} else {
+		} else if(port.equalsIgnoreCase("3")){
 			setInput2(input);
-			setInputSetFlag(true);
+			
 			try {
 				rhs = new Variable(input, this);
+				if(lhs!=null && condInput!=null)
+					setInputSetFlag(true);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			// System.out.println("Input2 is set");
+		}
+		
+		else
+		{
+			setInput3(input);
+			try {
+				condInput = new Variable(input, this);
+				if(lhs!=null && rhs!=null)
+					setInputSetFlag(true);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 	}
 
@@ -87,11 +107,13 @@ public class Sum extends Block {
 		List<Expression> inputs = new ArrayList<Expression>();
 		inputs.add(getLhs());
 		inputs.add(getRhs());
+		inputs.add(getCondInput());
 		return (ArrayList<Expression>) inputs;
 	}
 
 	private String input1;
 	private String input2;
+	private String input3;
 
 	private int sign;
 
@@ -132,9 +154,22 @@ public class Sum extends Block {
 
 		
 		try {
+			Expression thresh = new Variable(getThreshold(),this);
+			Expression criter = new Variable(getCriteria(),this);
+			Expression thresholdExpr = null;
+			//this.criteria = "GreaterAndEqual";
+			if(this.criteria.equalsIgnoreCase("GreaterAndEqual"))
+			{
+				Expression tempGreater = new GreaterThanExpression(this, condInput, thresh);
+				Expression tempEqual = new EqualsExpression(this, condInput, thresh);
+				thresholdExpr = new OrExpression(this, tempGreater, tempEqual);
+				
+			}
+				else
+			thresholdExpr = new GreaterThanExpression(this, condInput, thresh);
 			
 			
-			return( (new AddExpression(this, lhs, rhs,getOutput())));
+			return( (new SwitchExpression(this, lhs, rhs,condInput,getOutput(),getCriteria(),getThreshold(),thresh,criter,thresholdExpr)));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -145,7 +180,7 @@ public class Sum extends Block {
 
 	}
 
-	public Sum(String input1, String input2, String name, int sign) {
+	public Switch(String input1, String input2, String input3,String name, int sign) {
 
 		
 		
@@ -153,6 +188,8 @@ public class Sum extends Block {
 
 		setInput1(input1);
 		setInput2(input2);
+		setInput3(input3);
+		
 
 		Accfg accfgObj = new Accfg();
 		List<Expression> input = new ArrayList<Expression>();
@@ -167,60 +204,53 @@ public class Sum extends Block {
 
 	}
 
-	public Sum(String blockName) {
+	public Switch(String blockName) {
 		// TODO Auto-generated constructor stub
 
 		super(blockName);
 		Accfg accfgObj = new Accfg();
 		accfgObj.setOutput(getOutput());
 		setAccfg(accfgObj);
+		//Default threshold is set
+		setThreshold("0");
+		//Default condition/criteria is set
+		setCriteria("GreaterAndEqual");
 
+	}
+
+	public String getCriteria() {
+		return criteria;
+	}
+
+	public void setCriteria(String criteria) {
+		this.criteria = criteria;
+	}
+
+	public String getThreshold() {
+		return threshold;
+	}
+
+	public void setThreshold(String threshold) {
+		this.threshold = threshold;
+	}
+
+	public Expression getCondInput() {
+		return condInput;
+	}
+
+	public void setCondInput(Expression condInput) {
+		this.condInput = condInput;
+	}
+
+	public String getInput3() {
+		return input3;
+	}
+
+	public void setInput3(String input3) {
+		this.input3 = input3;
 	}
 
 	
-	//  Methods overridden for IProgram 
 
-/*	@Override
-	public Variable addVariable(Variable arg0) {
-		// TODO Auto-generated method stub
-
-		super.addVariable(arg0);
-		if (getInput2() == null || getInput2() == "")
-			lhs = arg0;
-		else
-			rhs = arg0;
-
-		return arg0;
-	}*/
-	/*
-	@Override
-	public Set<Variable> getVariables() {
-
-		Set<Variable> retSet = new HashSet<Variable>();
-		if (getLhs() != null)
-			retSet.add((Variable)getLhs());
-		if (getRhs() != null)
-			retSet.add((Variable)getRhs());
-		if (getOutput() != null)
-			System.out.println(getOutput().getClass());
-			retSet.add((Variable)getOutput());
-		// TODO Auto-generated method stub
-		return retSet;
-	}
-
-	@Override
-	public boolean hasVariable(Variable arg0) {
-		// TODO Auto-generated method stub
-		Set<Variable> checkSet = getVariables();
-		Iterator iter = checkSet.iterator();
-		while (iter.hasNext()) {
-			if (arg0.equals((Variable)iter.next())) {
-				return true;
-
-			}
-		}
-
-		return false;
-	}*/
 
 }

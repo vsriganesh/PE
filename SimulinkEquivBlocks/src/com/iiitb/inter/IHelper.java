@@ -10,5 +10,5 @@ import com.iiitb.blocks.Block;
  */
 public interface IHelper {
 
-	public void setAttr(NodeList attributes, int iter, Block block);
+	public void setAttr(NodeList attributes, int iter, Block block,String attrToFetch);
 }

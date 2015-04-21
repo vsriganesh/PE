@@ -3,43 +3,45 @@ package com.iiitb.cfg;
 import java.util.ArrayList;
 import java.util.List;
 
+import expression.Expression;
+
 public class Accfg {
 
-	private List<String> init = new ArrayList<String>();
-	private List<String> input = new ArrayList<String>();
-	private String output;
+	private List<Expression> init = new ArrayList<Expression>();
+	private List<Expression> input = new ArrayList<Expression>();
+	private Expression output;
 
-	private List<String> fp = new ArrayList<String>();
+	private List<Expression> fp = new ArrayList<Expression>();
 
-	public List<String> getInit() {
+	public List<Expression> getInit() {
 		return init;
 	}
 
-	public void setInit(List<String> init) {
+	public void setInit(List<Expression> init) {
 		this.init = init;
 	}
 
-	public List<String> getInput() {
+	public List<Expression> getInput() {
 		return input;
 	}
 
-	public void setInput(List<String> input) {
+	public void setInput(List<Expression> input) {
 		this.input = input;
 	}
 
-	public String getOutput() {
+	public Expression getOutput() {
 		return output;
 	}
 
-	public void setOutput(String output) {
+	public void setOutput(Expression output) {
 		this.output = output;
 	}
 
-	public List<String> getFp() {
+	public List<Expression> getFp() {
 		return fp;
 	}
 
-	public void setFp(List<String> fp) {
+	public void setFp(List<Expression> fp) {
 		this.fp = fp;
 	}
 	
@@ -54,7 +56,7 @@ public class Accfg {
 		 toRetTemp.append("\n");
 		 toRetTemp.append("Output : " + getOutput());
 		 toRetTemp.append("\n");
-		 toRetTemp.append("FP : " + getFp());
+		 toRetTemp.append("FP : " + getFp().toString());
 		 return toRetTemp.toString();
 		 
 		

@@ -1,16 +1,77 @@
 package com.iiitb.blocks;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+import program.IProgram;
+
 import com.iiitb.cfg.Accfg;
 import com.iiitb.inter.IBlock;
 
-public abstract class Block implements IBlock {
+import expression.Expression;
+import expression.Variable;
 
-	private String name;
+public abstract class Block implements IBlock,IProgram {
+
+	//private String name;
+	private Expression output;
 	private String value;
 	private int sign;
 	private Accfg accfg;
 
 	boolean inputSetFlag;
+	
+	
+	
+	
+	// Methods overridden for IProgram  - STARTS
+	
+	Set<Variable> variableSet = new HashSet<Variable>();
+	
+	@Override
+	public Variable addVariable(Variable arg0) {
+		// TODO Auto-generated method stub
+			System.out.println("Add variable is called");
+		variableSet.add(arg0);
+
+		return arg0;
+	}
+	
+	@Override
+	public Set<Variable> getVariables() {
+
+		
+		return variableSet;
+	}
+
+	@Override
+	public boolean hasVariable(Variable arg0) {
+		// TODO Auto-generated method stub
+		Set<Variable> checkSet = getVariables();
+		Iterator iter = checkSet.iterator();
+		while (iter.hasNext()) {
+			if (arg0.equals(iter.next())) {
+				return true;
+
+			}
+		}
+
+		return false;
+	}
+
+	// Methods overridden for IProgram - ENDS
+
+	public Expression getOutput() {
+		return output;
+	}
+
+	public void setOutput(Expression output) {
+		this.output = output;
+	}
 
 	public boolean isInputSetFlag() {
 		return inputSetFlag;
@@ -46,25 +107,32 @@ public abstract class Block implements IBlock {
 
 	public Block(String name) {
 		// TODO Auto-generated constructor stub
-		this.name = name;
+		Expression outputExpr = null;
+		try {
+			outputExpr = new Variable(name,this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.output = outputExpr;
 	}
 
 	public Block() {
 		// TODO Auto-generated constructor stub
 	}
-
+/*
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}
+	}*/
 
 	@Override
 	public String toString() {
 
-		return getName();
+		return (((Variable)getOutput()).getName());
 
 	}
 
@@ -73,7 +141,7 @@ public abstract class Block implements IBlock {
 
 		if (block instanceof Block) {
 
-			if (this.getName().equalsIgnoreCase(((Block) block).getName())) {
+			if (this.toString().equalsIgnoreCase(((Block) block).toString())) {
 
 				return true;
 			}

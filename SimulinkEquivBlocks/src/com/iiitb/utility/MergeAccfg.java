@@ -8,6 +8,9 @@ import com.iiitb.blocks.Block;
 import com.iiitb.cfg.Accfg;
 import com.iiitb.sort.TopologicalSort;
 
+import expression.Expression;
+import expression.Variable;
+
 public class MergeAccfg {
 
 	// Perform topological sort . For now this is hardcoded
@@ -15,8 +18,8 @@ public class MergeAccfg {
 	public static Accfg merge(ArrayList<Block> blockList) {
 
 		Accfg merged = null;
-		List<String> fpList = new ArrayList<String>();
-		
+		List<Expression> fpList = new ArrayList<Expression>();
+		List<Expression> initList = new ArrayList<Expression>();
 		/* Created a new list and copied all values from blockList. This is required since we remove blockList entries during iteration.
 		 * We pass "blockListToPass" to  findInputOutputVariable method
 		 */
@@ -70,10 +73,11 @@ public class MergeAccfg {
 			Iterator iter = blockList.iterator();
 			while (iter.hasNext()) {
 				Block block = (Block) iter.next();
-				System.out.println("Test in merge2 "+block.getName());
+				System.out.println("Test in merge2 "+((Variable)block.getOutput()).getName());
 				
-				if (block.getName().equalsIgnoreCase(sortFp)) {
+				if (((Variable)block.getOutput()).getName().equalsIgnoreCase(sortFp)) {
 					fpList.addAll(block.getAccfg().getFp());
+					initList.addAll(block.getAccfg().getInit());
 					iter.remove();
 					break;
 				}
@@ -83,6 +87,7 @@ public class MergeAccfg {
 		}
 
 		merged.setFp(fpList);
+		merged.setInit(initList);
 
 		// Call to set input and output
 		merged = findInputOutputVariable(merged, (ArrayList<Block>)blockListToPass);
@@ -96,45 +101,46 @@ public class MergeAccfg {
 	public static Accfg findInputOutputVariable(Accfg accfg,
 			ArrayList<Block> blockList) {
 
-		List<String> input = new ArrayList<String>();
-		List<String> output = new ArrayList<String>();
+		List<Expression> input = new ArrayList<Expression>();
+		List<Expression> output = new ArrayList<Expression>();
 
 		Iterator blockListIter = blockList.iterator();
 		while (blockListIter.hasNext()) {
 			
 		
 			Block block = (Block) blockListIter.next();
-			System.out.println("Block Name "+block.getName());
+			System.out.println("Block Name "+((Variable)(block.getOutput())).getName());
 			
 			input.addAll(block.getAccfg().getInput());
-			System.out.println("Input "+block.getAccfg().getInput());
+			//System.out.println("Input "+block.getAccfg().getInput());
 			
 			output.add(block.getAccfg().getOutput());
-			System.out.println("Output "+block.getAccfg().getOutput());
+			//System.out.println("Output "+block.getAccfg().getOutput());
 			
 
 		}
 
-		 System.out.println("Input "+input);
-		 System.out.println("Output "+output);
+		 System.out.println("Input Final "+input);
+		 System.out.println("Output Final "+output);
 
 		Iterator inputIter = input.iterator();
 		String inputVar = "";
 		String outputVar = "";
 		while (inputIter.hasNext()) {
-			inputVar = (String) inputIter.next();
+			inputVar = ((Variable) inputIter.next()).getName();
 			Iterator outputIter = output.iterator();
 
 			while (outputIter.hasNext()) {
 
-				outputVar = (String) outputIter.next();
+				outputVar = ((Variable) outputIter.next()).getName();
 
 				if (inputVar.equalsIgnoreCase(outputVar)) {
 					inputIter.remove();
 					outputIter.remove();
+					break;
 				}
 
-				break;
+				
 
 			}
 

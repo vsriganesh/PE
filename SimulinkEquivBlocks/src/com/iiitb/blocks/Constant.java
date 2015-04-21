@@ -2,8 +2,13 @@ package com.iiitb.blocks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.iiitb.cfg.Accfg;
+
+import expression.ConcreteConstant;
+import expression.Expression;
+import expression.Variable;
 
 /**
  * Constant block equivalent to Simulink block - Constant
@@ -15,8 +20,10 @@ public class Constant extends Block {
 
 		super(name);
 		Accfg accfgObj = new Accfg();
-		accfgObj.setOutput(name);
+		accfgObj.setOutput(getOutput());
 		setAccfg(accfgObj);
+		//Default value is set
+		setValue("1");
 	}
 
 	private String value;
@@ -32,7 +39,9 @@ public class Constant extends Block {
 	}
 
 	/*
-	 * public String getName() { return name; }
+	 * public String getName() { return name;
+	 * 
+	 * }
 	 * 
 	 * public void setName(String name) { this.name = name; }
 	 */
@@ -46,9 +55,24 @@ public class Constant extends Block {
 	}
 
 	@Override
-	public String expression() {
+	public Expression expression() {
 
-		return getName() + "=" + getValue();
+		Variable retVar = null;
+		try {
+			return new ConcreteConstant(Integer.parseInt(getValue()), this,getOutput());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// return null
+		return retVar;
+
+		// return getName() + "=" + getValue();
+
 	}
 
 	public Constant(String value, String name) {
@@ -58,8 +82,8 @@ public class Constant extends Block {
 
 		Accfg accfgObj = new Accfg();
 
-		accfgObj.setOutput(getName());
-		List<String> expr = new ArrayList<String>();
+		accfgObj.setOutput(getOutput());
+		List<Expression> expr = new ArrayList<Expression>();
 		expr.add(expression());
 		accfgObj.setFp(expr);
 		setAccfg(accfgObj);
@@ -67,20 +91,40 @@ public class Constant extends Block {
 	}
 
 	@Override
-	public ArrayList<String> getInput() {
+	public ArrayList<Expression> getInput() {
 		// TODO Auto-generated method stub
-		
-		//NO input for constant block. Returning null intentionally
+
+		// NO input for constant block. Returning null intentionally
 		return null;
 	}
 
 	@Override
-	public void setInput(String input) {
+	public void setInput(String input,String port) {
 		// TODO Auto-generated method stub
-		
+
 		// Intentionally left blank
 		// NO input for constant block
-		
+
+	}
+
+	// IProgram methods to override - Intentionally left blank
+
+	@Override
+	public Variable addVariable(Variable arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<Variable> getVariables() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasVariable(Variable arg0) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

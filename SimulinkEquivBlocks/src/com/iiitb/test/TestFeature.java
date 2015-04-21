@@ -11,7 +11,7 @@ public class TestFeature {
 		// TODO Auto-generated method stub
 		try {
 			Document doc = ParseXML
-					.initializeDocument("C:/Users/vsriganesh/Documents/MATLAB/model_code_subsystem.xml");
+					.initializeDocument("C:/Users/vsriganesh/Documents/MATLAB/delay_timer.xml");
 
 			/*
 			 * 
@@ -22,7 +22,7 @@ public class TestFeature {
 			
 			Accfg mergedAccfg = ParseXML.parseDocument(doc, doc.getDocumentElement());
 
-			System.out.println(mergedAccfg);
+			System.out.println("\n\nThe final merged ACCFG is : \n\n"+mergedAccfg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

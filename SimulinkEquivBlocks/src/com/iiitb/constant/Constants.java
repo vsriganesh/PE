@@ -18,5 +18,12 @@ public class Constants {
 	public static final String SUM = "Sum";
 	public static final String VALUE = "Value";
 	public static final String INPUT = "Inputs";
+	
+	
+	public static final String DELAY = "Delay";
+	public static final String IC = "InitialCondition";
+	public static final String SWITCH = "Switch";
+	public static final String CRITERIA = "Criteria";
+	public static final String THRESHOLD = "Threshold";
 
 }

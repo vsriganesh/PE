@@ -97,6 +97,38 @@ public class TopologicalSort {
 	public ArrayList<String> sortGraph(
 			Map<String, LinkedList<String>> adjacencyList) {
 
+		Set<String> delayList = new TreeSet<String>();
+		Iterator testIter = adjacencyList.keySet().iterator();
+		
+		// To remove delay block as delay block forms cycle
+		
+		while(testIter.hasNext())
+		{
+			String key = (String)testIter.next();
+			//System.out.println("key is "+key);
+			List<String> tempList = adjacencyList.get(key);
+			Iterator temp = tempList.iterator();
+			while(temp.hasNext())
+			{
+				String tempDelay = (String)temp.next();
+				if(tempDelay.contains("Delay"))
+						{
+							//delayList.add(tempDelay);
+							temp.remove();	
+					
+						}
+			}
+		}
+		 testIter = adjacencyList.keySet().iterator();
+		while(testIter.hasNext())
+		{
+			String key = (String)testIter.next();
+			System.out.println("key is "+key);
+			System.out.println("value is "+adjacencyList.get(key));
+			
+		}
+		
+		
 		// Identify Root Nodes in the Subsystem
 		List<String> rootNodes = rootNodes(adjacencyList);
 
@@ -169,7 +201,29 @@ public class TopologicalSort {
 		// Nodes with no out going edges are added here. These nodes were
 		// initially ignored
 		sortedList.addAll(lastNodeList);
-		// System.out.println("Sorted List : "+sortedList);
+		
+		
+		
+		
+		System.out.println("delayList : "+delayList);
+		
+		
+		// All delay blocks should be added in the end of sortedList for a subsystem
+		
+		Iterator iter = sortedList.iterator();
+		while(iter.hasNext())
+		{
+			String block = (String) iter.next();
+			if(block.startsWith("Delay"))
+			{
+				delayList.add(block);
+				iter.remove();
+				
+			}
+		}
+		
+		sortedList.addAll(delayList);
+		
 		return (ArrayList<String>) sortedList;
 	}
 }

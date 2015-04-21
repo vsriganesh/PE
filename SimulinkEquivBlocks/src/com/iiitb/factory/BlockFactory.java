@@ -1,11 +1,16 @@
 package com.iiitb.factory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.w3c.dom.NodeList;
 
 import com.iiitb.blocks.Block;
 import com.iiitb.blocks.Constant;
+import com.iiitb.blocks.Delay;
 import com.iiitb.blocks.Subsystem;
 import com.iiitb.blocks.Sum;
+import com.iiitb.blocks.Switch;
 import com.iiitb.cfg.Accfg;
 import com.iiitb.constant.Constants;
 import com.iiitb.utility.BlockFactoryUtility;
@@ -21,22 +26,60 @@ public class BlockFactory {
 	 */
 	public static Block generateBlock(String blockName, NodeList attributes) {
 
+		
+		System.out.println("testing "+blockName);
+		
 		Block block = null;
 		if (blockName.startsWith(Constants.CONST)) {
 			block = new Constant(blockName);
-			BlockFactoryUtility.setBlockAttributes(Constants.VALUE, attributes,
+			
+			List<String> attrFetchList = new ArrayList<String>(); 
+			attrFetchList.add(Constants.VALUE);
+			
+			
+			BlockFactoryUtility.setBlockAttributes(attrFetchList, attributes,
 					block);
 
 		}
 
 		if (blockName.startsWith(Constants.SUM)) {
 			block = new Sum(blockName);
-
-			BlockFactoryUtility.setBlockAttributes(Constants.INPUT, attributes,
+			
+			List<String> attrFetchList = new ArrayList<String>(); 
+			attrFetchList.add(Constants.INPUT);
+			
+			BlockFactoryUtility.setBlockAttributes(attrFetchList, attributes,
 					block);
 
 		}
+		
+		if (blockName.startsWith(Constants.DELAY)) {
+			
+			System.out.println("Entered for delay step1");
+			
+			block = new Delay(blockName);
+			List<String> attrFetchList = new ArrayList<String>(); 
+			attrFetchList.add(Constants.IC);
+			
+			BlockFactoryUtility.setBlockAttributes(attrFetchList, attributes,
+					block);
 
+		}
+		
+	if (blockName.startsWith(Constants.SWITCH)) {
+			
+			System.out.println("Entered for switch step1");
+			
+			block = new Switch(blockName);
+			
+			List<String> attrFetchList = new ArrayList<String>(); 
+			attrFetchList.add(Constants.CRITERIA);
+			attrFetchList.add(Constants.THRESHOLD);
+			
+			BlockFactoryUtility.setBlockAttributes(attrFetchList, attributes,
+					block);
+
+		}
 		return block;
 
 	}

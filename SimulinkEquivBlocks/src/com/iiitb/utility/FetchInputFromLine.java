@@ -12,6 +12,9 @@ import org.w3c.dom.NodeList;
 
 import com.iiitb.blocks.Block;
 
+import expression.Expression;
+import expression.Variable;
+
 public class FetchInputFromLine {
 	public static Map<String, LinkedList<String>> adjacencyList = new HashMap<String, LinkedList<String>>();
 
@@ -21,6 +24,7 @@ public class FetchInputFromLine {
 
 		String sourceNode = "";
 		String destNode = "";
+		String destPort="";
 		// Map to generate adjacency list representation of subsystem
 
 		for (int iter = 0; iter < attributes.getLength(); iter++) {
@@ -33,13 +37,12 @@ public class FetchInputFromLine {
 
 				for (int tempIter = 0; tempIter < temp.getLength(); tempIter++) {
 
-					// System.out.println("Testing :"
-					// +temp.item(tempIter).getNodeValue());
+					 System.out.println("Testing :" +temp.item(tempIter).getNodeValue());
 					if (temp.item(tempIter).getNodeValue()
 							.equalsIgnoreCase("SrcBlock")) {
 
 						sourceNode = attributes.item(iter).getTextContent();
-						System.out.println("src inside" + sourceNode);
+						//System.out.println("src inside " + sourceNode);
 
 					}
 
@@ -47,7 +50,15 @@ public class FetchInputFromLine {
 							.equalsIgnoreCase("DstBlock")) {
 
 						destNode = attributes.item(iter).getTextContent();
-						System.out.println("dest inside" + destNode);
+						//System.out.println("dest inside " + destNode);
+					}
+					
+					// Used for switch to identify port of input and condition
+					if (temp.item(tempIter).getNodeValue()
+							.equalsIgnoreCase("DstPort")) {
+
+						destPort = attributes.item(iter).getTextContent();
+						//System.out.println("dest port " + destPort);
 					}
 
 				}
@@ -58,6 +69,8 @@ public class FetchInputFromLine {
 			// System.out.println("Entered ");
 			System.out.println("src " + sourceNode);
 			System.out.println("dest " + destNode);
+			System.out.println("dest " + destPort);
+			
 			if (adjacencyList.get(sourceNode) != null) {
 
 				adjacencyList.get(sourceNode).add(destNode);
@@ -79,21 +92,21 @@ public class FetchInputFromLine {
 
 				// CHECK THIS
 
-				// System.out.println("1 "+destNode);
-				// System.out.println("2 "+blockObj.getName());
+				 System.out.println("1 "+destNode);
+				 System.out.println("2 "+blockObj.getClass());
 
-				if (destNode.equalsIgnoreCase(blockObj.getName())) {
-					blockObj.setInput(sourceNode);
+				if (destNode.equalsIgnoreCase(((Variable)blockObj.getOutput()).getName())) {
+					blockObj.setInput(sourceNode,destPort);
 
 					// System.out.println("Super ");
 
 					if (blockObj.isInputSetFlag()) {
 
 						// System.out.println("Entered both input");
-						List<String> input = new ArrayList<String>();
+						List<Expression> input = new ArrayList<Expression>();
 						input = blockObj.getInput();
 						blockObj.getAccfg().setInput(input);
-						List<String> expr = new ArrayList<String>();
+						List<Expression> expr = new ArrayList<Expression>();
 						expr.add(blockObj.expression());
 						blockObj.getAccfg().setFp(expr);
 						return blockObj;

@@ -203,7 +203,7 @@ public class ParseXML {
 			for (int nodeIter = 0; nodeIter < lineChildNodesOfSystemNodeList
 					.size(); nodeIter++) {
 
-				System.out.println("Node Iter Value " + nodeIter);
+				System.out.println("Node Iter Value " + lineChildNodesOfSystemNodeList.size());
 
 				// test can be used for any testing purpose
 
@@ -211,6 +211,8 @@ public class ParseXML {
 						(ArrayList<Block>) blockList,
 						lineChildNodesOfSystemNodeList.get(nodeIter)
 								.getChildNodes());
+				
+				
 
 			}
 
@@ -218,6 +220,7 @@ public class ParseXML {
 
 			// BlockList has all blocks with ACCFG set
 			// Merge based on topological sort and Display
+			System.out.println("blockList size "+blockList.size());
 			Accfg retAccfg = MergeAccfg.merge((ArrayList<Block>) blockList);
 
 			/*
