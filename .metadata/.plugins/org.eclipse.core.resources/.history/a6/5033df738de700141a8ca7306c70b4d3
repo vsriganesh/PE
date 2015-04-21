@@ -1,0 +1,84 @@
+package com.iiitb.utility;
+
+import java.util.List;
+
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.NodeList;
+
+import com.iiitb.blocks.Block;
+import com.iiitb.blocks.Constant;
+import com.iiitb.blocks.Delay;
+import com.iiitb.blocks.Sum;
+import com.iiitb.blocks.Switch;
+import com.iiitb.constant.Constants;
+import com.iiitb.helper.ConstHelper;
+import com.iiitb.helper.DelayHelper;
+import com.iiitb.helper.SumHelper;
+import com.iiitb.inter.IHelper;
+
+public class BlockFactoryUtility {
+
+	public static void setBlockAttributes(List<String> attrToFetchList,
+			NodeList attributes, Block block) {
+		IHelper helper = null;
+
+		for (String attrToFetch : attrToFetchList) {
+
+			for (int iter = 0; iter < attributes.getLength(); iter++) {
+				// Prevent #text tag
+				if (attributes.item(iter).getNodeName() == Constants.PARA_TAG)
+
+				{
+
+					NamedNodeMap temp = attributes.item(iter).getAttributes();
+
+					for (int tempIter = 0; tempIter < temp.getLength(); tempIter++) {
+						System.out.println("test "
+								+ temp.item(tempIter).getNodeValue());
+						System.out.println("test1 " + attrToFetch);
+						if (temp.item(tempIter).getNodeValue()
+								.equalsIgnoreCase(attrToFetch)) {
+							System.out.println(block.getClass());
+							System.out.println(Constant.class);
+							if (block.getClass() == Constant.class) {
+								System.out
+										.println("Entered for constant step2");
+								helper = new ConstHelper();
+								helper.setAttr(attributes, iter, block);
+
+							}
+
+							if (block.getClass() == Sum.class) {
+								System.out.println("Entered for sum step2");
+								helper = new SumHelper();
+								helper.setAttr(attributes, iter, block);
+
+							}
+
+							if (block.getClass() == Delay.class) {
+								System.out.println("Entered for delay step2");
+								helper = new DelayHelper();
+								helper.setAttr(attributes, iter, block);
+
+							}
+							
+							if (block.getClass() == Switch.class) {
+								System.out.println("Entered for switch step2");
+								helper = new DelayHelper();
+								helper.setAttr(attributes, iter, block);
+
+							}
+
+							
+
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+	}
+}

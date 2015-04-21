@@ -1,0 +1,61 @@
+package com.iiitb.helper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.w3c.dom.NodeList;
+
+import com.iiitb.blocks.Switch;
+import com.iiitb.blocks.Block;
+import com.iiitb.constant.Constants;
+import com.iiitb.inter.IHelper;
+
+import expression.Expression;
+import expression.GreaterThanExpression;
+
+public class SwitchHelper implements IHelper{
+
+	@Override
+	public void setAttr(NodeList attributes, int iter, Block block) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("Test in switch "+attributes.item(iter).getTextContent());
+		
+		if((attributes.item(iter).getNodeName()).equalsIgnoreCase(Constants.THRESHOLD))
+		{
+		
+			((Switch)block).setThreshold(attributes.item(iter).getTextContent());
+		}
+		
+		
+		
+		if((attributes.item(iter).getNodeName()).equalsIgnoreCase(Constants.CRITERIA))
+		{
+		
+			// Set >= expression or > expression
+			
+			
+			if(attributes.item(iter).getTextContent().contains("&gt;"))
+			{
+				((Switch)block).setCondition("Greater");
+			}
+			
+		
+				
+			
+			
+			/*((Switch)block).setCondition( );*/
+		}
+		
+		
+		// Set FP based on value
+			List<Expression> expr = new ArrayList<Expression>();
+			expr.add(block.expression());
+			block.getAccfg().setFp(expr);
+		
+		
+	}
+	
+	
+
+}

@@ -1,0 +1,7 @@
+package com.iiitb.factory;
+
+import com.iiitb.inter.IHelper;
+
+public class DelayHelper implements IHelper {
+
+}

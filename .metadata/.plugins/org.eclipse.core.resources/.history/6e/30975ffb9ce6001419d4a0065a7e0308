@@ -1,0 +1,87 @@
+package com.iiitb.blocks;
+
+import java.util.ArrayList;
+import java.util.Set;
+
+import expression.AddExpression;
+import expression.EqualsExpression;
+import expression.Expression;
+import expression.Variable;
+
+public class Delay extends Block {
+
+	private Expression inp;
+	private Expression output;
+	
+
+
+	public Delay(String blockName) {
+		// TODO Auto-generated constructor stub
+		setOutput(blockName);
+	}
+
+	public Expression getOutput() {
+		return output;
+	}
+
+	public void setOutput(Expression output) {
+		this.output = output;
+	}
+
+
+
+	@Override
+	public Expression expression() {
+		// TODO Auto-generated method stub
+		
+		try {
+			return (new EqualsExpression(this, getInp(), getOutput()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// return null
+		
+		return null;
+	}
+
+	@Override
+	public ArrayList<Expression> getInput() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setInput(String input) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Variable addVariable(Variable arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<Variable> getVariables() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasVariable(Variable arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public Expression getInp() {
+		return inp;
+	}
+
+	public void setInp(Expression inp) {
+		this.inp = inp;
+	}
+
+}
