@@ -60,6 +60,7 @@ public class BlockFactory {
 			block = new Delay(blockName);
 			List<String> attrFetchList = new ArrayList<String>(); 
 			attrFetchList.add(Constants.IC);
+			attrFetchList.add(Constants.DELAY_LENGTH);
 			
 			BlockFactoryUtility.setBlockAttributes(attrFetchList, attributes,
 					block);

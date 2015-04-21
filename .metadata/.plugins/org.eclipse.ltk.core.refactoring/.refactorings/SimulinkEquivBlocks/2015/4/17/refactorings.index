@@ -6,3 +6,7 @@
 1429539210560	Encapsulate field 'threshold'
 1429555298594	Encapsulate field 'condInput'
 1429558859725	Encapsulate field 'input3'
+1429642400263	Delete element
+1429642440973	Encapsulate field 'delay'
+1429646768818	Encapsulate field 'delayLengthList'
+1429647536582	Encapsulate field 'delayLength'

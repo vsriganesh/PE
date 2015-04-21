@@ -23,7 +23,6 @@
 <fullyQualifiedTypeName name="java.lang.Override"/>
 <fullyQualifiedTypeName name="java.util.LinkedList"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="java.util.Set"/>
 <fullyQualifiedTypeName name="com.iiitb.factory.BlockUtility"/>
 <fullyQualifiedTypeName name="com.iiitb.blocks.Block"/>
 <fullyQualifiedTypeName name="com.iiitb.factory.ConstHelper"/>
@@ -39,16 +38,19 @@
 <fullyQualifiedTypeName name="com.iiitb.factory.DelayHelper"/>
 <fullyQualifiedTypeName name="javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction"/>
 <fullyQualifiedTypeName name="expression.Expression"/>
-<fullyQualifiedTypeName name="expression.EqualsExpression"/>
-<fullyQualifiedTypeName name="com.iiitb.blocks.Delay"/>
 <fullyQualifiedTypeName name="expression.ConcreteConstant"/>
 <fullyQualifiedTypeName name="expression.Variable"/>
-<fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.iiitb.blocks.Switch"/>
 <fullyQualifiedTypeName name="com.iiitb.blocks.Constant"/>
-<fullyQualifiedTypeName name="expression.GreaterThanExpression"/>
 <fullyQualifiedTypeName name="com.iiitb.helper.SwitchHelper"/>
+<fullyQualifiedTypeName name="expression.GreaterThanExpression"/>
 <fullyQualifiedTypeName name="expression.SwitchExpression"/>
+<fullyQualifiedTypeName name="expression.EqualsExpression"/>
+<fullyQualifiedTypeName name="expression.OrExpression"/>
+<fullyQualifiedTypeName name="com.iiitb.constant.Constants"/>
+<fullyQualifiedTypeName name="com.iiitb.blocks.Delay"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
 </qualifiedTypeNameHistroy>

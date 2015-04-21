@@ -22,8 +22,11 @@ public class Constants {
 	
 	public static final String DELAY = "Delay";
 	public static final String IC = "InitialCondition";
+	public static final String DELAY_LENGTH = "DelayLength";
+	
 	public static final String SWITCH = "Switch";
 	public static final String CRITERIA = "Criteria";
 	public static final String THRESHOLD = "Threshold";
+	
 
 }

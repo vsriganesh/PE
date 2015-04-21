@@ -12,7 +12,7 @@ public class Accfg {
 	private Expression output;
 
 	private List<Expression> fp = new ArrayList<Expression>();
-
+	private List<Expression> delay = new ArrayList<Expression>();
 	public List<Expression> getInit() {
 		return init;
 	}
@@ -57,9 +57,19 @@ public class Accfg {
 		 toRetTemp.append("Output : " + getOutput());
 		 toRetTemp.append("\n");
 		 toRetTemp.append("FP : " + getFp().toString());
+		 toRetTemp.append("\n");
+		 toRetTemp.append("Delay : " + getDelay().toString());
 		 return toRetTemp.toString();
 		 
 		
+	}
+
+	public List<Expression> getDelay() {
+		return delay;
+	}
+
+	public void setDelay(List<Expression> delay) {
+		this.delay = delay;
 	}
 	
 	

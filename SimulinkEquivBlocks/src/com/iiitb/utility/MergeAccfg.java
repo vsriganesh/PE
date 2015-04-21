@@ -5,7 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.iiitb.blocks.Block;
+import com.iiitb.blocks.Delay;
 import com.iiitb.cfg.Accfg;
+import com.iiitb.constant.Constants;
 import com.iiitb.sort.TopologicalSort;
 
 import expression.Expression;
@@ -20,6 +22,7 @@ public class MergeAccfg {
 		Accfg merged = null;
 		List<Expression> fpList = new ArrayList<Expression>();
 		List<Expression> initList = new ArrayList<Expression>();
+		List<Expression> delayList = new ArrayList<Expression>();
 		/* Created a new list and copied all values from blockList. This is required since we remove blockList entries during iteration.
 		 * We pass "blockListToPass" to  findInputOutputVariable method
 		 */
@@ -78,6 +81,20 @@ public class MergeAccfg {
 				if (((Variable)block.getOutput()).getName().equalsIgnoreCase(sortFp)) {
 					fpList.addAll(block.getAccfg().getFp());
 					initList.addAll(block.getAccfg().getInit());
+					/*For Delay block with delay_length >1 , first individual delay components
+					 * are added to delayList*/
+					if(sortFp.startsWith(Constants.DELAY))
+					{
+						delayList.addAll(block.getAccfg().getDelay());
+						Iterator<Delay> delayIter = ((Delay)block).getDelayLengthList().iterator();
+						while(delayIter.hasNext())
+						{
+							delayList.addAll(delayIter.next().getAccfg().getDelay());
+						
+						}
+						
+					}
+					
 					iter.remove();
 					break;
 				}
@@ -88,6 +105,7 @@ public class MergeAccfg {
 
 		merged.setFp(fpList);
 		merged.setInit(initList);
+		merged.setDelay(delayList);
 
 		// Call to set input and output
 		merged = findInputOutputVariable(merged, (ArrayList<Block>)blockListToPass);

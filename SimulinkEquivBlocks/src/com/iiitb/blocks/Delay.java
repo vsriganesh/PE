@@ -1,6 +1,7 @@
 package com.iiitb.blocks;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -15,9 +16,19 @@ import expression.Variable;
 public class Delay extends Block {
 
 
-	
+	// Attributes to be captured
 	private int initialValue;
+	private int delayLength;
+	
+	//Input
 	private Expression inp;
+	
+	
+	/* Based on delay length the collection will be updated
+		If the delay_length is 10 the (delay_length -1) = 9 additional delay blocks 
+		whose *delay_length =1* 
+		will be added to the collection)*/ 
+	private List<Delay> delayLengthList;
 
 
 	public Delay(String blockName) {
@@ -110,6 +121,38 @@ public class Delay extends Block {
 
 	public void setInitialValue(int initialValue) {
 		this.initialValue = initialValue;
+	}
+
+
+
+
+
+	public List<Delay> getDelayLengthList() {
+		return delayLengthList;
+	}
+
+
+
+
+
+	public void setDelayLengthList(List<Delay> delayLengthList) {
+		this.delayLengthList = delayLengthList;
+	}
+
+
+
+
+
+	public int getDelayLength() {
+		return delayLength;
+	}
+
+
+
+
+
+	public void setDelayLength(int delayLength) {
+		this.delayLength = delayLength;
 	}
 
 }
