@@ -24,6 +24,12 @@ public class Constant extends Block {
 		setAccfg(accfgObj);
 		//Default value is set
 		setValue("1");
+		/* Here Fp is set directly with value considered as 1. If the value is not 1 this 
+		 * FP will be overwritten in the ConstHelper.java 
+		 */
+		List<Expression> expr = new ArrayList<Expression>();
+		expr.add(this.expression());
+		this.getAccfg().setFp(expr);
 	}
 
 	private String value;

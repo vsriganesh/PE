@@ -97,6 +97,8 @@ public class TopologicalSort {
 	public ArrayList<String> sortGraph(
 			Map<String, LinkedList<String>> adjacencyList) {
 
+		
+		//System.out.println("Adjacency list "+adjacencyList);
 		Set<String> delayList = new TreeSet<String>();
 		Iterator testIter = adjacencyList.keySet().iterator();
 		

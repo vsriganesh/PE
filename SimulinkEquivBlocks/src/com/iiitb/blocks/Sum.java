@@ -145,7 +145,7 @@ public class Sum extends Block {
 
 	}
 
-	public Sum(String input1, String input2, String name, int sign) {
+	/*public Sum(String input1, String input2, String name, int sign) {
 
 		
 		
@@ -165,7 +165,7 @@ public class Sum extends Block {
 		accfgObj.setFp(expr);
 		setAccfg(accfgObj);
 
-	}
+	}*/
 
 	public Sum(String blockName) {
 		// TODO Auto-generated constructor stub

@@ -28,14 +28,60 @@ public class FetchInputFromLine {
 
 		String sourceNode = "";
 		String destNode = "";
+		//List<String> destNodeTemp = new LinkedList<String>();
 		String destPort="";
 		// Map to generate adjacency list representation of subsystem
 
 		for (int iter = 0; iter < attributes.getLength(); iter++) {
 
+			
 			if (attributes.item(iter).getNodeName() == "P")
 
 			{
+				
+				// Currently branch is not considered
+				
+				/*if(attributes.item(iter).getNodeName().equalsIgnoreCase("Branch"))
+				{
+					
+					NodeList branchChildren = attributes.item(iter).getChildNodes();
+					for(int brTemp=0;brTemp<branchChildren.getLength();brTemp++)
+					{
+						if(branchChildren.item(brTemp).getNodeName() .equalsIgnoreCase("P"))
+						{
+							
+							
+							NamedNodeMap temp = branchChildren.item(brTemp).getAttributes();
+
+							for (int tempIter = 0; tempIter < temp.getLength(); tempIter++) {
+
+								//System.out.println("boolean value "+temp.item(tempIter).getNodeValue().equalsIgnoreCase("DstBlock")); 
+								if(temp.item(tempIter).getNodeValue().equalsIgnoreCase("DstBlock"))
+								 {
+									// System.out.println("Dst block value "+branchChildren.item(brTemp).getTextContent());
+									 //destNode = branchChildren.item(brTemp).getTextContent();
+									 destNodeTemp.add(branchChildren.item(brTemp).getTextContent());
+								 }
+							}
+							
+							if(branchChildren.item(brTemp).getNodeValue().equalsIgnoreCase("DstBlock"))
+							{
+								System.out.println("DestNode is : "+ branchChildren.item(brTemp).getTextContent());
+							}
+						}
+					}
+					
+					
+					
+				}
+				*/
+				
+				
+				
+				
+				
+			
+				
 				// for a single <p>
 				NamedNodeMap temp = attributes.item(iter).getAttributes();
 
@@ -46,7 +92,7 @@ public class FetchInputFromLine {
 							.equalsIgnoreCase("SrcBlock")) {
 
 						sourceNode = attributes.item(iter).getTextContent();
-						//System.out.println("src inside " + sourceNode);
+						
 
 					}
 
@@ -54,7 +100,7 @@ public class FetchInputFromLine {
 							.equalsIgnoreCase("DstBlock")) {
 
 						destNode = attributes.item(iter).getTextContent();
-						//System.out.println("dest inside " + destNode);
+						
 					}
 					
 					// Used for switch to identify port of input and condition
@@ -62,18 +108,21 @@ public class FetchInputFromLine {
 							.equalsIgnoreCase("DstPort")) {
 
 						destPort = attributes.item(iter).getTextContent();
-						//System.out.println("dest port " + destPort);
+						
 					}
 
 				}
+			
+				
+				
 			}
 		}
 
-		if (sourceNode != "" && destNode != "") {
-			// System.out.println("Entered ");
+		if (sourceNode != "" && destNode!="") {
+			
 			System.out.println("src " + sourceNode);
 			System.out.println("dest " + destNode);
-			System.out.println("dest " + destPort);
+			
 			
 			if (adjacencyList.get(sourceNode) != null) {
 
@@ -87,6 +136,9 @@ public class FetchInputFromLine {
 				adjacencyList.put(sourceNode, addList);
 
 			}
+			
+			//destNodeTemp.clear();
+			
 
 			Iterator blockListIter = blockList.iterator();
 
@@ -110,21 +162,23 @@ public class FetchInputFromLine {
 					if (blockObj.isInputSetFlag() || destNode.startsWith(Constants.DELAY)) {
 
 						// System.out.println("Entered both input");
-						
+						// Applicable only for delay block. For other blocks input is set.
 						//Flag to set input based on delay length.
 						/* If delay length is 1 then input is directly the source node
 						 */
 						boolean flag = false;
-						if(((Variable)blockObj.getOutput()).getName().startsWith(Constants.DELAY) && ((Delay)blockObj).getDelayLength()>1)
+						if(((Variable)blockObj.getOutput()).getName().startsWith(Constants.DELAY))
 						{
-							blockObj.setInput(((Variable)blockObj.getOutput()).getName()+"_"+"delay_"+(((Delay)blockObj).getDelayLength()-2),destPort);
+								if( ((Delay)blockObj).getDelayLength()>1)
+								{
+										blockObj.setInput(((Variable)blockObj.getOutput()).getName()+"_"+"delay_"+(((Delay)blockObj).getDelayLength()-2),destPort);
+								}
+								else
+								{
+									blockObj.setInput(sourceNode,destPort);
+									flag = true;
+								}
 						}
-						else
-						{
-							blockObj.setInput(sourceNode,destPort);
-							flag = true;
-						}
-						
 						
 						List<Expression> input = new ArrayList<Expression>();
 						input = blockObj.getInput();
@@ -158,11 +212,11 @@ public class FetchInputFromLine {
 								List<Expression> exprTemp = new ArrayList<Expression>();
 								exprTemp.add(delayObj.expression());
 								delayObj.getAccfg().setDelay(exprTemp);
-								//System.out.println("Added "+delayObj);
+								
 								delayLengthSet.add(0,(Delay)delayObj);
 								
 							}
-							//System.out.println("TESTINGGGGGGGGGGGG"+delayLengthSet);
+							;
 							((Delay)blockObj).setDelayLengthList(delayLengthSet);
 							blockObj.getAccfg().setDelay(expr);
 							
@@ -171,7 +225,7 @@ public class FetchInputFromLine {
 							{
 							blockObj.setInput(sourceNode,destPort);
 							input = blockObj.getInput();
-							//System.out.println("input "+input);
+							
 							blockObj.getAccfg().setInput(input);
 							}
 						}

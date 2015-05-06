@@ -1,0 +1,132 @@
+package com.iiitb.helper;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import com.iiitb.blocks.Block;
+import com.iiitb.constant.Constants;
+import com.iiitb.utility.ParseXML;
+
+public class ConstHelperTest {
+
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+
+	@Test
+	public void testSetAttr() {
+		Document doc = ParseXML
+				.initializeDocument("C:/Users/vsriganesh/Documents/MATLAB/delay_timer.xml");
+		//ParseXML.parseDocument(doc, doc.getDocumentElement());
+		
+		List<Block> blockList = new ArrayList<Block>();
+
+		
+
+			// Parse XML
+
+			// NodeList blockChildNodesOfSystemNode = null;
+			// NodeList lineChildNodesOfSystemNode = null;
+
+			ArrayList<Node> blockChildNodesOfSystemNodeList = new ArrayList<Node>();
+			ArrayList<Node> lineChildNodesOfSystemNodeList = new ArrayList<Node>();
+
+			NodeList tempForProcessing = null;
+
+			if (currSubSystemNode.getNodeName().equalsIgnoreCase(
+					Constants.MODEL_INFO)) {
+				tempForProcessing = currSubSystemNode.getChildNodes();
+				for (int tempForProcessingIter = 0; tempForProcessingIter < tempForProcessing
+						.getLength(); tempForProcessingIter++) {
+					if (tempForProcessing.item(tempForProcessingIter)
+							.getNodeName().equals(Constants.MODEL)) {
+
+						tempForProcessing = tempForProcessing.item(
+								tempForProcessingIter).getChildNodes();
+						break;
+
+					}
+
+				}
+
+			}
+
+			else
+				tempForProcessing = currSubSystemNode.getChildNodes();
+
+			NodeList tempSubsystemSystemChildren = null;
+			/*
+			 * System.out.println(currSubSystemNode.getNodeName());
+			 * System.out.println(tempForProcessing.item(0));
+			 * System.out.println(tempForProcessing.item(1));
+			 * System.out.println(tempForProcessing.item(2));
+			 */
+
+			for (int tempForProcessingIter = 0; tempForProcessingIter < tempForProcessing
+					.getLength(); tempForProcessingIter++) {
+
+				if (tempForProcessing.item(tempForProcessingIter).getNodeName()
+						.equals(Constants.SYSTEM)) {
+					tempSubsystemSystemChildren = tempForProcessing.item(
+							tempForProcessingIter).getChildNodes();
+					System.out.println("Length "
+							+ tempSubsystemSystemChildren.getLength());
+				}
+
+				else
+					continue;
+			}
+
+			for (int tempForProcessingIter = 0; tempForProcessingIter < tempSubsystemSystemChildren
+					.getLength(); tempForProcessingIter++) {
+
+				if (tempSubsystemSystemChildren.item(tempForProcessingIter)
+						.getNodeName().equalsIgnoreCase(Constants.BLOCK)) {
+
+					blockChildNodesOfSystemNodeList
+							.add(tempSubsystemSystemChildren
+									.item(tempForProcessingIter));
+
+				}
+
+				if (tempSubsystemSystemChildren.item(tempForProcessingIter)
+						.getNodeName().equalsIgnoreCase(Constants.LINE)) {
+
+					lineChildNodesOfSystemNodeList
+							.add(tempSubsystemSystemChildren
+									.item(tempForProcessingIter));
+
+				}
+
+			}
+
+			System.out
+					.println("Block Child " + blockChildNodesOfSystemNodeList);
+			System.out.println("Line Child " + lineChildNodesOfSystemNodeList);
+		fail("Not yet implemented");
+	}
+
+}

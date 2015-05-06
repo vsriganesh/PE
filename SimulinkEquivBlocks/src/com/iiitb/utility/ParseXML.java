@@ -164,19 +164,33 @@ public class ParseXML {
 								.get(nodeIter);
 						// block type will be "block"
 						// block name will be (for e.g) "constant"
-						blockName = temp.item(tempIter).getNodeValue();
-						System.out.println("Block Name is : " + blockName);
+						blockName = blockName+temp.item(tempIter).getNodeValue();
+						
+					}
+					if (temp.item(tempIter).getNodeName()
+							.equalsIgnoreCase(Constants.TYPE)) {
+						/*blockType = blockChildNodesOfSystemNodeList
+								.get(nodeIter);*/
+						// block type will be "block"
+						// block name will be (for e.g) "constant"
+						if(blockName=="")
+						blockName = temp.item(tempIter).getNodeValue()+"_";
+						else
+							blockName = temp.item(tempIter).getNodeValue()+"_"+blockName;
+						
 					}
 				}
-
+				//System.out.println("Block Name is : " + blockName);
 				if (blockName != "" && blockType != null) {
 
-					if (blockName.equalsIgnoreCase(Constants.SUB_SYS)) {
+					if (blockName.startsWith(Constants.SUB_SYS)) {
 
 						countSubSystem++;
 
 						Accfg accfg = parseDocument(doc, blockType);
-						Block block = BlockFactory.generateBlock(blockName,
+						
+						
+						Block block = BlockFactory.generateBlock(blockName.split("_", 2)[1],
 								accfg);
 						if (block != null)
 							blockList.add(block);
@@ -188,7 +202,8 @@ public class ParseXML {
 						NodeList attr = blockType.getChildNodes();
 
 						// Simulink blocks to java library blocks
-
+						//System.out.println("Test " +blockName);
+						//System.out.println("Testing before sending block name "+blockName.split("_", 2)[1]);
 						Block block = BlockFactory.generateBlock(blockName,
 								attr);
 						if (block != null)
@@ -203,7 +218,7 @@ public class ParseXML {
 			for (int nodeIter = 0; nodeIter < lineChildNodesOfSystemNodeList
 					.size(); nodeIter++) {
 
-				System.out.println("Node Iter Value " + lineChildNodesOfSystemNodeList.size());
+				//System.out.println("Node Iter Value " + lineChildNodesOfSystemNodeList.size());
 
 				// test can be used for any testing purpose
 

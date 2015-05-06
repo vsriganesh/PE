@@ -1,0 +1,50 @@
+package com.iiitb.inter;
+
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import com.iiitb.helper.DelayHelper;
+
+public class IHelperTest {
+
+	public abstract IHelper createInstance();
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+
+	@Test
+	public void testSetAttr() {
+		fail("Not yet implemented");
+	}
+	
+	public class ConstantHelperTest extends IHelperTest {
+	    public IHelper createInstance() {
+	        return new ConstHelper();
+	    }
+	}
+
+	public class DelayHelperTest extends MyInterfaceTest {
+	    public IHelper createInstance() {
+	        return new DelayHelper();
+	    }
+	}
+
+}

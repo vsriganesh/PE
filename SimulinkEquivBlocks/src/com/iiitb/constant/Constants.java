@@ -9,6 +9,8 @@ public class Constants {
 	public static final String LINE = "Line";
 
 	public static final String NAME = "Name";
+	public static final String TYPE = "BlockType";
+	
 	public static final String SUB_SYS = "Subsystem";
 	public static final String PARA_TAG = "P";
 	public static final String SOURCE = "SrcBlock";

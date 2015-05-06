@@ -34,13 +34,12 @@ public class BlockFactoryUtility {
 					NamedNodeMap temp = attributes.item(iter).getAttributes();
 
 					for (int tempIter = 0; tempIter < temp.getLength(); tempIter++) {
-						System.out.println("test "
+					/*	System.out.println("test "
 								+ temp.item(tempIter).getNodeValue());
-						System.out.println("test1 " + attrToFetch);
+						System.out.println("test1 " + attrToFetch);*/
 						if (temp.item(tempIter).getNodeValue()
 								.equalsIgnoreCase(attrToFetch)) {
-							System.out.println(block.getClass());
-							System.out.println(Constant.class);
+						
 							if (block.getClass() == Constant.class) {
 								System.out
 										.println("Entered for constant step2");

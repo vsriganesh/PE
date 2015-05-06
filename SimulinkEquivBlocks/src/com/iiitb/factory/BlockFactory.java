@@ -27,11 +27,11 @@ public class BlockFactory {
 	public static Block generateBlock(String blockName, NodeList attributes) {
 
 		
-		System.out.println("testing "+blockName);
+		
 		
 		Block block = null;
 		if (blockName.startsWith(Constants.CONST)) {
-			block = new Constant(blockName);
+			block = new Constant(blockName.split("_", 2)[1]);
 			
 			List<String> attrFetchList = new ArrayList<String>(); 
 			attrFetchList.add(Constants.VALUE);
@@ -43,7 +43,7 @@ public class BlockFactory {
 		}
 
 		if (blockName.startsWith(Constants.SUM)) {
-			block = new Sum(blockName);
+			block = new Sum(blockName.split("_", 2)[1]);
 			
 			List<String> attrFetchList = new ArrayList<String>(); 
 			attrFetchList.add(Constants.INPUT);
@@ -57,7 +57,7 @@ public class BlockFactory {
 			
 			System.out.println("Entered for delay step1");
 			
-			block = new Delay(blockName);
+			block = new Delay(blockName.split("_", 2)[1]);
 			List<String> attrFetchList = new ArrayList<String>(); 
 			attrFetchList.add(Constants.IC);
 			attrFetchList.add(Constants.DELAY_LENGTH);
@@ -71,7 +71,7 @@ public class BlockFactory {
 			
 			System.out.println("Entered for switch step1");
 			
-			block = new Switch(blockName);
+			block = new Switch(blockName.split("_", 2)[1]);
 			
 			List<String> attrFetchList = new ArrayList<String>(); 
 			attrFetchList.add(Constants.CRITERIA);
@@ -93,7 +93,7 @@ public class BlockFactory {
 	public static Block generateBlock(String blockName, Accfg accfg) {
 		Block block = null;
 		if (blockName.startsWith(Constants.SUB_SYS)) {
-			block = new Subsystem(accfg, blockName);
+			block = new Subsystem(accfg, blockName.split("_", 2)[1]);
 
 		}
 		return block;

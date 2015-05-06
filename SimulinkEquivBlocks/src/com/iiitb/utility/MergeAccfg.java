@@ -39,9 +39,9 @@ public class MergeAccfg {
 		  ArrayList<String> sortedList =
 		  ts.sortGraph(FetchInputFromLine.adjacencyList);
 		
+		  System.out.println("Before Sort List "+blockList);
+		System.out.println("Sorted List "+sortedList);
 		
-		System.out.println("sorted List "+sortedList);
-		System.out.println("Block List "+blockList);
 		
 		
 		/*
