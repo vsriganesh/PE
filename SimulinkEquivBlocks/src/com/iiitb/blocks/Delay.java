@@ -35,7 +35,9 @@ public class Delay extends Block {
 		// TODO Auto-generated constructor stub
 		super(blockName);
 		Accfg accfgObj = new Accfg();
-		accfgObj.setOutput(getOutput());
+		List<Expression> outputTemp = new ArrayList<Expression>();
+		outputTemp.add(getOutput());
+		accfgObj.setOutput(outputTemp);
 		
 		List<Expression> init = new ArrayList<Expression>();
 		accfgObj.setInit(init);

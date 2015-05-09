@@ -160,13 +160,13 @@ public class Switch extends Block {
 			this.criteria = "GreaterAndEqual";
 			if(this.criteria.equalsIgnoreCase("GreaterAndEqual"))
 			{
-				Expression tempGreater = new GreaterThanExpression(this, condInput, thresh);
+				Expression tempGreater = new GreaterThanExpression(this, condInput, thresh,getOutput());
 				Expression tempEqual = new EqualsExpression(this, condInput, thresh);
-				thresholdExpr = new OrExpression(this, tempGreater, tempEqual);
+				thresholdExpr = new OrExpression(this, tempGreater, tempEqual,getOutput());
 				
 			}
 				else
-			thresholdExpr = new GreaterThanExpression(this, condInput, thresh);
+			thresholdExpr = new GreaterThanExpression(this, condInput, thresh,getOutput());
 			
 			
 			return( (new SwitchExpression(this, lhs, rhs,condInput,getOutput(),getCriteria(),getThreshold(),thresh,criter,thresholdExpr)));
@@ -196,7 +196,9 @@ public class Switch extends Block {
 		input.add(getLhs());
 		input.add(getRhs());
 		accfgObj.setInput(input);
-		accfgObj.setOutput(getOutput());
+		List<Expression> outputTemp = new ArrayList<Expression>();
+		outputTemp.add(getOutput());
+		accfgObj.setOutput(outputTemp);
 		List<Expression> expr = new ArrayList<Expression>();
 		expr.add(expression());
 		accfgObj.setFp(expr);
@@ -209,7 +211,9 @@ public class Switch extends Block {
 
 		super(blockName);
 		Accfg accfgObj = new Accfg();
-		accfgObj.setOutput(getOutput());
+		List<Expression> outputTemp = new ArrayList<Expression>();
+		outputTemp.add(getOutput());
+		accfgObj.setOutput(outputTemp);
 		setAccfg(accfgObj);
 		//Default threshold is set
 		setThreshold("0");

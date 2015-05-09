@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<item value="2" key="TypeHierarchyViewPart.hierarchyview"/>
 	<item value="C:\Users\vsriganesh\Desktop" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="false" key="TypeHierarchyViewPart.qualifiednames"/>
+	<item value="3" key="TypeHierarchyViewPart.orientation"/>
+	<item value="false" key="TypeHierarchyViewPart.linkeditors"/>
 	<section name="OptionalMessageDialog.hide.">
 		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
 	</section>
@@ -8,7 +12,7 @@
 		<item value="false" key="GenerateJavadoc"/>
 	</section>
 	<section name="BuildPathsPropertyPage">
-		<item value="0" key="pageIndex"/>
+		<item value="2" key="pageIndex"/>
 	</section>
 	<section name="RefactoringWizard.preview">
 		<item value="400" key="height"/>

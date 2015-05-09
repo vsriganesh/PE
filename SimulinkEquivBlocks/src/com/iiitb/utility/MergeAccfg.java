@@ -1,8 +1,11 @@
 package com.iiitb.utility;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import com.iiitb.blocks.Block;
 import com.iiitb.blocks.Delay;
@@ -36,11 +39,25 @@ public class MergeAccfg {
 		  
 		
 		  TopologicalSort ts = new TopologicalSort();
-		  ArrayList<String> sortedList =
-		  ts.sortGraph(FetchInputFromLine.adjacencyList);
+		 Iterator<String> iterKey =  FetchInputFromLine.adjacencyList.keySet().iterator();
+		
+		 Map<String,LinkedList<String>> tempMap = new HashMap<String,LinkedList<String>>();
+		 while(iterKey.hasNext())
+		 {
+			 String key = iterKey.next();
+			 Iterator<DestNode> tempIter = FetchInputFromLine.adjacencyList.get(key).iterator();
+			 LinkedList<String> tempList = new LinkedList<String>();
+			 while(tempIter.hasNext())
+			 {
+				 tempList.add(tempIter.next().getName());
+			 }
+			 
+			 tempMap.put(key, tempList);
+		 }
+		  ArrayList<String> sortedList = ts.sortGraph(tempMap);
 		
 		  System.out.println("Before Sort List "+blockList);
-		System.out.println("Sorted List "+sortedList);
+		  System.out.println("Sorted List "+sortedList);
 		
 		
 		
@@ -72,13 +89,14 @@ public class MergeAccfg {
 
 		while (sortedIter.hasNext()) {
 			sortFp = (String) sortedIter.next();
-			System.out.println("Test in merge1 "+sortFp);
+			
 			Iterator iter = blockList.iterator();
 			while (iter.hasNext()) {
 				Block block = (Block) iter.next();
-				System.out.println("Test in merge2 "+((Variable)block.getOutput()).getName());
+				
 				
 				if (((Variable)block.getOutput()).getName().equalsIgnoreCase(sortFp)) {
+					
 					fpList.addAll(block.getAccfg().getFp());
 					initList.addAll(block.getAccfg().getInit());
 					/*For Delay block with delay_length >1 , first individual delay components
@@ -128,11 +146,12 @@ public class MergeAccfg {
 		
 			Block block = (Block) blockListIter.next();
 			System.out.println("Block Name "+((Variable)(block.getOutput())).getName());
-			
+			System.out.println("test "+block.getAccfg());
+			if(block.getAccfg().getInput()!=null)
 			input.addAll(block.getAccfg().getInput());
 			//System.out.println("Input "+block.getAccfg().getInput());
 			
-			output.add(block.getAccfg().getOutput());
+			output.addAll(block.getAccfg().getOutput());
 			//System.out.println("Output "+block.getAccfg().getOutput());
 			
 
@@ -166,7 +185,7 @@ public class MergeAccfg {
 
 		accfg.setInput(input);
 		if(output.size()!=0)
-		accfg.setOutput(output.get(0));
+		accfg.setOutput(output);
 
 		return accfg;
 	}

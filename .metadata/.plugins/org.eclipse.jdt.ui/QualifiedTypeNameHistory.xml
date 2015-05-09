@@ -1,23 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javax.xml.bind.Element"/>
-<fullyQualifiedTypeName name="org.w3c.dom.Element"/>
-<fullyQualifiedTypeName name="java.io.File"/>
-<fullyQualifiedTypeName name="org.w3c.dom.NamedNodeMap"/>
-<fullyQualifiedTypeName name="com.iiitb.inter.IBlock"/>
-<fullyQualifiedTypeName name="org.w3c.dom.NodeList"/>
-<fullyQualifiedTypeName name="java.io.ObjectInputStream.GetField"/>
-<fullyQualifiedTypeName name="java.security.AccessControlContext"/>
-<fullyQualifiedTypeName name="com.iiitb.blocks.Accfg"/>
-<fullyQualifiedTypeName name="java.lang.RuntimeException"/>
-<fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="com.iiitb.utility.Constant"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="com.iiitb.sort.TopologicalSort"/>
 <fullyQualifiedTypeName name="com.iiitb.sort.GraphNode"/>
-<fullyQualifiedTypeName name="java.lang.Override"/>
-<fullyQualifiedTypeName name="java.util.LinkedList"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="com.iiitb.factory.BlockUtility"/>
 <fullyQualifiedTypeName name="com.iiitb.factory.ConstHelper"/>
 <fullyQualifiedTypeName name="com.iiitb.inter.IHelper"/>
@@ -42,7 +27,6 @@
 <fullyQualifiedTypeName name="expression.SwitchExpression"/>
 <fullyQualifiedTypeName name="expression.EqualsExpression"/>
 <fullyQualifiedTypeName name="expression.OrExpression"/>
-<fullyQualifiedTypeName name="com.iiitb.constant.Constants"/>
 <fullyQualifiedTypeName name="com.iiitb.blocks.Delay"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="java.util.Set"/>
@@ -60,4 +44,20 @@
 <fullyQualifiedTypeName name="com.iiitb.blocks.Block"/>
 <fullyQualifiedTypeName name="com.iiitb.utility.FetchInputFromLine"/>
 <fullyQualifiedTypeName name="com.iiitb.utility.FetchInputFromLineTest"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.LinkedList"/>
+<fullyQualifiedTypeName name="java.lang.Override"/>
+<fullyQualifiedTypeName name="expression.DivideExpression"/>
+<fullyQualifiedTypeName name="com.iiitb.blocks.Divide"/>
+<fullyQualifiedTypeName name="com.iiitb.helper.DivideHelper"/>
+<fullyQualifiedTypeName name="com.iiitb.helper.RelationalHelper"/>
+<fullyQualifiedTypeName name="com.iiitb.blocks.RelationalOperator"/>
+<fullyQualifiedTypeName name="expression.LesserThanExpression"/>
+<fullyQualifiedTypeName name="com.iiitb.helper.LogicalHelper"/>
+<fullyQualifiedTypeName name="expression.AndExpression"/>
+<fullyQualifiedTypeName name="expression.NotExpression"/>
+<fullyQualifiedTypeName name="com.iiitb.blocks.LogicalOperator"/>
+<fullyQualifiedTypeName name="com.iiitb.blocks.MinMax"/>
+<fullyQualifiedTypeName name="com.iiitb.constant.Constants"/>
 </qualifiedTypeNameHistroy>

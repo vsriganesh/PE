@@ -1,6 +1,7 @@
 package com.iiitb.blocks;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import com.iiitb.cfg.Accfg;
@@ -22,7 +23,7 @@ public class Subsystem extends Block{
 		// TODO Auto-generated method stub
 		Variable retVar=null;
 		try {
-			return(new SubBlockExpression(((Variable)getAccfg().getOutput()).getName(),this,getOutput()));
+			return(new SubBlockExpression(((Variable)getAccfg().getOutput().get(0)).getName(),this,getOutput()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,6 +62,7 @@ public class Subsystem extends Block{
 		
 		Accfg accfgLocal = new Accfg();
 		accfgLocal.setFp(accfg.getFp());
+		System.out.println("Testing in subsystem "+expression());
 		accfgLocal.getFp().add(expression());
 		
 		/* There wont be an input to subsystem block. 
@@ -68,7 +70,9 @@ public class Subsystem extends Block{
 		accfgLocal.setInput(new ArrayList<Expression>());
 
 		// Set output as block name
-		accfgLocal.setOutput(getOutput());
+		List<Expression> outputTemp = new ArrayList<Expression>();
+		outputTemp.add(getOutput());
+		accfgLocal.setOutput(outputTemp);
 		
 		setAccfg(accfgLocal);
 	}

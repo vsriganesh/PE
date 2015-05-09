@@ -20,7 +20,9 @@ public class Constant extends Block {
 
 		super(name);
 		Accfg accfgObj = new Accfg();
-		accfgObj.setOutput(getOutput());
+		List<Expression> outputTemp = new ArrayList<Expression>();
+		outputTemp.add(getOutput());
+		accfgObj.setOutput(outputTemp);
 		setAccfg(accfgObj);
 		//Default value is set
 		setValue("1");
@@ -88,7 +90,9 @@ public class Constant extends Block {
 
 		Accfg accfgObj = new Accfg();
 
-		accfgObj.setOutput(getOutput());
+		List<Expression> outputTemp = new ArrayList<Expression>();
+		outputTemp.add(getOutput());
+		accfgObj.setOutput(outputTemp);
 		List<Expression> expr = new ArrayList<Expression>();
 		expr.add(expression());
 		accfgObj.setFp(expr);

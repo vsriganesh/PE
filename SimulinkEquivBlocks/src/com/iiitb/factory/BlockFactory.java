@@ -8,6 +8,10 @@ import org.w3c.dom.NodeList;
 import com.iiitb.blocks.Block;
 import com.iiitb.blocks.Constant;
 import com.iiitb.blocks.Delay;
+import com.iiitb.blocks.Divide;
+import com.iiitb.blocks.LogicalOperator;
+import com.iiitb.blocks.MinMax;
+import com.iiitb.blocks.RelationalOperator;
 import com.iiitb.blocks.Subsystem;
 import com.iiitb.blocks.Sum;
 import com.iiitb.blocks.Switch;
@@ -81,6 +85,56 @@ public class BlockFactory {
 					block);
 
 		}
+	
+	
+	if (blockName.startsWith(Constants.DIVIDE)) {
+		block = new Divide(blockName.split("_", 2)[1]);
+		
+		List<String> attrFetchList = new ArrayList<String>(); 
+		attrFetchList.add(Constants.INPUT);
+		
+		BlockFactoryUtility.setBlockAttributes(attrFetchList, attributes,
+				block);
+
+	}
+	
+	if (blockName.startsWith(Constants.RELATIONAL)) {
+		block = new RelationalOperator(blockName.split("_", 2)[1]);
+		
+		List<String> attrFetchList = new ArrayList<String>(); 
+		attrFetchList.add(Constants.OPERATOR);
+		
+		BlockFactoryUtility.setBlockAttributes(attrFetchList, attributes,
+				block);
+
+	}
+	
+	if (blockName.startsWith(Constants.LOGICAL)) {
+		block = new LogicalOperator(blockName.split("_", 2)[1]);
+		
+		List<String> attrFetchList = new ArrayList<String>(); 
+		attrFetchList.add(Constants.OPERATOR);
+		
+		BlockFactoryUtility.setBlockAttributes(attrFetchList, attributes,
+				block);
+
+	}
+	
+	System.out.println("blockName is ################################## "+blockName);
+	if (blockName.startsWith(Constants.MINMAX)) {
+		block = new MinMax(blockName.split("_", 2)[1]);
+		
+		List<String> attrFetchList = new ArrayList<String>(); 
+		attrFetchList.add(Constants.FUNCTION);
+		attrFetchList.add(Constants.INPUT);
+		
+		BlockFactoryUtility.setBlockAttributes(attrFetchList, attributes,
+				block);
+
+	}
+	
+	
+	
 		return block;
 
 	}
@@ -93,6 +147,7 @@ public class BlockFactory {
 	public static Block generateBlock(String blockName, Accfg accfg) {
 		Block block = null;
 		if (blockName.startsWith(Constants.SUB_SYS)) {
+			System.out.println("subsystem block name is "+blockName);
 			block = new Subsystem(accfg, blockName.split("_", 2)[1]);
 
 		}

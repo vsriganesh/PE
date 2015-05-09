@@ -134,7 +134,7 @@ public class Sum extends Block {
 		try {
 			
 			
-			return( (new AddExpression(this, lhs, rhs,getOutput())));
+			return((new AddExpression(this, lhs, rhs,getOutput(),getSign())));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -172,7 +172,9 @@ public class Sum extends Block {
 
 		super(blockName);
 		Accfg accfgObj = new Accfg();
-		accfgObj.setOutput(getOutput());
+		List<Expression> outputTemp = new ArrayList<Expression>();
+		outputTemp.add(getOutput());
+		accfgObj.setOutput(outputTemp);
 		setAccfg(accfgObj);
 
 	}

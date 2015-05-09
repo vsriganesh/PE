@@ -9,7 +9,7 @@ public class Accfg {
 
 	private List<Expression> init = new ArrayList<Expression>();
 	private List<Expression> input = new ArrayList<Expression>();
-	private Expression output;
+	private List<Expression> output = new ArrayList<Expression>();
 
 	private List<Expression> fp = new ArrayList<Expression>();
 	private List<Expression> delay = new ArrayList<Expression>();
@@ -29,11 +29,11 @@ public class Accfg {
 		this.input = input;
 	}
 
-	public Expression getOutput() {
+	public List<Expression> getOutput() {
 		return output;
 	}
 
-	public void setOutput(Expression output) {
+	public void setOutput(List<Expression> output) {
 		this.output = output;
 	}
 

@@ -101,12 +101,7 @@ public class ParseXML {
 				tempForProcessing = currSubSystemNode.getChildNodes();
 
 			NodeList tempSubsystemSystemChildren = null;
-			/*
-			 * System.out.println(currSubSystemNode.getNodeName());
-			 * System.out.println(tempForProcessing.item(0));
-			 * System.out.println(tempForProcessing.item(1));
-			 * System.out.println(tempForProcessing.item(2));
-			 */
+		
 
 			for (int tempForProcessingIter = 0; tempForProcessingIter < tempForProcessing
 					.getLength(); tempForProcessingIter++) {
@@ -146,9 +141,9 @@ public class ParseXML {
 
 			}
 
-			System.out
+		/*	System.out
 					.println("Block Child " + blockChildNodesOfSystemNodeList);
-			System.out.println("Line Child " + lineChildNodesOfSystemNodeList);
+			System.out.println("Line Child " + lineChildNodesOfSystemNodeList);*/
 
 			for (int nodeIter = 0; nodeIter < blockChildNodesOfSystemNodeList
 					.size(); nodeIter++) {
@@ -169,8 +164,7 @@ public class ParseXML {
 					}
 					if (temp.item(tempIter).getNodeName()
 							.equalsIgnoreCase(Constants.TYPE)) {
-						/*blockType = blockChildNodesOfSystemNodeList
-								.get(nodeIter);*/
+						
 						// block type will be "block"
 						// block name will be (for e.g) "constant"
 						if(blockName=="")
@@ -180,17 +174,17 @@ public class ParseXML {
 						
 					}
 				}
-				//System.out.println("Block Name is : " + blockName);
+				
 				if (blockName != "" && blockType != null) {
 
 					if (blockName.startsWith(Constants.SUB_SYS)) {
-
+						System.out.println("Entered Subsystem");
 						countSubSystem++;
-
+						
 						Accfg accfg = parseDocument(doc, blockType);
 						
 						
-						Block block = BlockFactory.generateBlock(blockName.split("_", 2)[1],
+						Block block = BlockFactory.generateBlock(blockName,
 								accfg);
 						if (block != null)
 							blockList.add(block);
@@ -222,7 +216,7 @@ public class ParseXML {
 
 				// test can be used for any testing purpose
 
-				Block test = FetchInputFromLine.parseLine(
+				FetchInputFromLine.parseLine(
 						(ArrayList<Block>) blockList,
 						lineChildNodesOfSystemNodeList.get(nodeIter)
 								.getChildNodes());

@@ -11,7 +11,8 @@ public class Constants {
 	public static final String NAME = "Name";
 	public static final String TYPE = "BlockType";
 	
-	public static final String SUB_SYS = "Subsystem";
+	public static final String SUB_SYS = "SubSystem";
+	
 	public static final String PARA_TAG = "P";
 	public static final String SOURCE = "SrcBlock";
 
@@ -29,6 +30,20 @@ public class Constants {
 	public static final String SWITCH = "Switch";
 	public static final String CRITERIA = "Criteria";
 	public static final String THRESHOLD = "Threshold";
+	
+	
+	
+	public static final String DIVIDE = "Product";
+	
+	
+	public static final String RELATIONAL = "RelationalOperator";
+	public static final String OPERATOR	 = "Operator";
+
+	public static final String LOGICAL = "Logic";
+	
+	public static final String MINMAX = "MinMax";
+	public static final String FUNCTION= "Function";
+	
 	
 
 }
