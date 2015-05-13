@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,9 @@ import com.iiitb.factory.BlockFactory;
 import com.iiitb.factory.BlockFactoryTest;
 import com.iiitb.utility.FetchInputFromLine;
 import com.iiitb.utility.FetchInputFromLineTest;
+import com.iiitb.utility.FetchInputFromLineTest1;
+import com.iiitb.utility.MergeAccfg;
+import com.iiitb.utility.MergeAccfgTest;
 import com.iiitb.utility.ParseXML;
 
 public class TestConstantSumBlock {
@@ -171,7 +175,7 @@ public class TestConstantSumBlock {
 		 * in any order
 		 * 
 		 *  When we iterate lineChildNodesOfSystemNodeList and display node names , 
-		 *  there should be  "Line,Line" corrsponding to "Constant - Sum" and "Constant1-Sum"
+		 *  there should be  "Line,Line" corresponding to "Constant - Sum" and "Constant1-Sum"
 		 
 		 * 
 		 * */
@@ -360,28 +364,89 @@ public class TestConstantSumBlock {
 		assertEquals(blockList.size(),3);
 		
 		
+		
+		/* TEST : 7
+		 * 
+		 * Check if proper FP is set for all blocks
+		 * 
+		 * FP for Sum block - Sum = Constant + Constant1
+		 * FP for Constant block = Constant = value
+		 * FP for Constant1 block = Constant1 = value
+		 * 
+		 * 
+		 * 
+		 * 
+		 * */
+		
+		
+		
 		for (int nodeIter = 0; nodeIter < lineChildNodesOfSystemNodeList
 				.size(); nodeIter++) {
 
-			//System.out.println("Node Iter Value " + lineChildNodesOfSystemNodeList.size());
 
-			// test can be used for any testing purpose
-
-			 FetchInputFromLineTest testInput = new FetchInputFromLineTest();
+			 FetchInputFromLineTest1 testInput = new FetchInputFromLineTest1();
 			
-			Block test = testInput.parseLineTest(
+			testInput.parseLineTest(
 					(ArrayList<Block>) blockList,
 					lineChildNodesOfSystemNodeList.get(nodeIter)
 							.getChildNodes());
-			
-			
 
 		}
 		
+			Iterator<Block> test7Iter = blockList.iterator();
+			while(test7Iter.hasNext())
+			{
+				String tempFp = test7Iter.next().toString();
+				String testFp="";
+				if(tempFp.equalsIgnoreCase("Constant"))
+				{
+					testFp = "Constant=1";
+				}
+				else if(tempFp.equalsIgnoreCase("Constant1"))
+				{
+					testFp = "Constant1=8";
+				}
+				else
+					testFp = "Sum=(Constant + Constant1)";
+				
+				assertTrue(testFp, testFp.equalsIgnoreCase("Sum=(Constant + Constant1)") || testFp.equalsIgnoreCase("Constant=1") || testFp.equalsIgnoreCase("Constant1=8"));
+				
+			}
+			
 		
+		/*
+		 * TEST : 8
+		 * 
+		 * 
+		 * Merge all individual ACCFG - 
+		 * 
+		 * 1) Merge FP list
+		 * 2) Cancel input , output as per algorithm and generate final input , output list for merged ACCFG
+		 * 
+		 * 
+		 * 
+		 * 
+		 * Test the size of init , input , output , delay list of the merged accfg object
+		 * 
+		 * As per our model , init and delay list size will be 0
+		 * 
+		 * input will be cancelled wit output and list size will be 0
+		 * 
+		 * output will have 'Sum' variable and hence the size will be 1
+		 * 
+		 
+		 * 
+		 * */
 		
-		
-		
+			Accfg retAccfg = MergeAccfgTest.mergeTest((ArrayList<Block>) blockList);
+			
+			assertEquals(0, retAccfg.getInit().size());
+
+			assertEquals(1, retAccfg.getOutput().size());
+
+			assertEquals(0, retAccfg.getInput().size());
+			
+			assertEquals(0, retAccfg.getDelay().size());
 		
 	}
 
