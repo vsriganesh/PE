@@ -296,6 +296,25 @@ public class TestConstantSumBlock {
 				if (blockName.startsWith(Constants.SUB_SYS)) {
 
 					ParseXML.countSubSystem++;
+					
+					ArrayList<String> tempInputList = new ArrayList<String>();
+					
+					// If there are input ports in the subsystem then we got
+					// to find what is to be propagated into the subsystem
+					// This can be done by analysing the <line> of the
+					// current subsystem
+
+					for (int lineIter = 0; lineIter < lineChildNodesOfSystemNodeList
+							.size(); lineIter++) {
+
+						// tempInputList can be used for testing
+						tempInputList.addAll(FetchInputFromLine
+								.parseLineForPort(
+
+								lineChildNodesOfSystemNodeList
+										.get(lineIter).getChildNodes()));
+
+					}
 
 					Accfg accfg = ParseXML.parseDocument(doc, blockType);
 					
@@ -304,7 +323,7 @@ public class TestConstantSumBlock {
 							accfg);
 					if (block != null)
 						blockList.add(block);
-					System.out.println(accfg);
+					
 
 				}
 

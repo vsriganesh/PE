@@ -18,6 +18,9 @@ import expression.Variable;
 public class Subsystem extends Block{
 
 	
+	private List<Expression> inputList = new ArrayList<Expression>();
+	
+	
 	@Override
 	public Expression expression() {
 		// TODO Auto-generated method stub
@@ -35,16 +38,21 @@ public class Subsystem extends Block{
 	}
 
 	@Override
-	// Purposefully not overridden
+
 	public ArrayList<Expression> getInput() {
 		// TODO Auto-generated method stub
-		return null;
+		return ((ArrayList<Expression>)inputList);
 	}
 
 	@Override
-	// Purposefully not overridden
+	
 	public void setInput(String input,String port) {
-		// TODO Auto-generated method stub
+		try {
+			inputList.add(new Variable(input,this));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -62,12 +70,10 @@ public class Subsystem extends Block{
 		
 		Accfg accfgLocal = new Accfg();
 		accfgLocal.setFp(accfg.getFp());
-		System.out.println("Testing in subsystem "+expression());
-		accfgLocal.getFp().add(expression());
 		
-		/* There wont be an input to subsystem block. 
-		If input is to be set , fetch from passed Accfg instance*/
-		accfgLocal.setInput(new ArrayList<Expression>());
+		accfgLocal.getFp().add(expression());
+
+		accfgLocal.setInput(inputList);
 
 		// Set output as block name
 		List<Expression> outputTemp = new ArrayList<Expression>();
@@ -98,5 +104,7 @@ public class Subsystem extends Block{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	
 
 }

@@ -9,6 +9,7 @@ import com.iiitb.blocks.Block;
 import com.iiitb.blocks.Constant;
 import com.iiitb.blocks.Delay;
 import com.iiitb.blocks.Divide;
+import com.iiitb.blocks.InPort;
 import com.iiitb.blocks.LogicalOperator;
 import com.iiitb.blocks.MinMax;
 import com.iiitb.blocks.RelationalOperator;
@@ -18,6 +19,7 @@ import com.iiitb.constant.Constants;
 import com.iiitb.helper.ConstHelper;
 import com.iiitb.helper.DelayHelper;
 import com.iiitb.helper.DivideHelper;
+import com.iiitb.helper.InPortHelper;
 import com.iiitb.helper.LogicalHelper;
 import com.iiitb.helper.MinMaxHelper;
 import com.iiitb.helper.RelationalHelper;
@@ -42,11 +44,7 @@ public class BlockFactoryUtility {
 					NamedNodeMap temp = attributes.item(iter).getAttributes();
 
 					for (int tempIter = 0; tempIter < temp.getLength(); tempIter++) {
-						/*
-						 * System.out.println("test " +
-						 * temp.item(tempIter).getNodeValue());
-						 * System.out.println("test1 " + attrToFetch);
-						 */
+					
 						if (temp.item(tempIter).getNodeValue()
 								.equalsIgnoreCase(attrToFetch)) {
 
@@ -107,12 +105,18 @@ public class BlockFactoryUtility {
 
 							}
 							
-							System.out
-							.println("************************************************** "
-									+ block.getClass());
+						
 							if (block.getClass() == MinMax.class) {
 
 								helper = new MinMaxHelper();
+								helper.setAttr(attributes, iter, block,
+										attrToFetch);
+
+							}
+							
+							if (block.getClass() == InPort.class) {
+
+								helper = new InPortHelper();
 								helper.setAttr(attributes, iter, block,
 										attrToFetch);
 

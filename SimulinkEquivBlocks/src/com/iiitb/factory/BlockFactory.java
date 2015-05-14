@@ -9,6 +9,7 @@ import com.iiitb.blocks.Block;
 import com.iiitb.blocks.Constant;
 import com.iiitb.blocks.Delay;
 import com.iiitb.blocks.Divide;
+import com.iiitb.blocks.InPort;
 import com.iiitb.blocks.LogicalOperator;
 import com.iiitb.blocks.MinMax;
 import com.iiitb.blocks.RelationalOperator;
@@ -120,7 +121,7 @@ public class BlockFactory {
 
 	}
 	
-	System.out.println("blockName is ################################## "+blockName);
+	
 	if (blockName.startsWith(Constants.MINMAX)) {
 		block = new MinMax(blockName.split("_", 2)[1]);
 		
@@ -133,7 +134,17 @@ public class BlockFactory {
 
 	}
 	
-	
+	if (blockName.startsWith(Constants.INPORT)) {
+		block = new InPort(blockName.split("_", 2)[1]);
+		
+		List<String> attrFetchList = new ArrayList<String>(); 
+		attrFetchList.add(Constants.PORT);
+		
+		
+		BlockFactoryUtility.setBlockAttributes(attrFetchList, attributes,
+				block);
+
+	}
 	
 		return block;
 

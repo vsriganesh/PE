@@ -1,30 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.iiitb.inter.IHelper"/>
-<fullyQualifiedTypeName name="com.iiitb.blocks.Sum"/>
-<fullyQualifiedTypeName name="com.iiitb.blocks.SubSystem"/>
-<fullyQualifiedTypeName name="com.iiitb.cfg.Accfg"/>
 <fullyQualifiedTypeName name="program.IProgram"/>
 <fullyQualifiedTypeName name="expression.AddExpression"/>
 <fullyQualifiedTypeName name="java.util.TreeSet"/>
 <fullyQualifiedTypeName name="expression.SubBlockExpression"/>
 <fullyQualifiedTypeName name="com.iiitb.factory.DelayHelper"/>
 <fullyQualifiedTypeName name="javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction"/>
-<fullyQualifiedTypeName name="expression.Expression"/>
 <fullyQualifiedTypeName name="expression.ConcreteConstant"/>
 <fullyQualifiedTypeName name="expression.Variable"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.iiitb.blocks.Switch"/>
-<fullyQualifiedTypeName name="com.iiitb.blocks.Constant"/>
 <fullyQualifiedTypeName name="com.iiitb.helper.SwitchHelper"/>
 <fullyQualifiedTypeName name="expression.GreaterThanExpression"/>
 <fullyQualifiedTypeName name="expression.SwitchExpression"/>
-<fullyQualifiedTypeName name="expression.EqualsExpression"/>
 <fullyQualifiedTypeName name="expression.OrExpression"/>
 <fullyQualifiedTypeName name="com.iiitb.blocks.Delay"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="java.util.Set"/>
-<fullyQualifiedTypeName name="com.iiitb.utility.ParseXML"/>
 <fullyQualifiedTypeName name="org.w3c.dom.Document"/>
 <fullyQualifiedTypeName name="org.junit.Before"/>
 <fullyQualifiedTypeName name="org.junit.After"/>
@@ -60,4 +52,12 @@
 <fullyQualifiedTypeName name="com.iiitb.utility.DestNode"/>
 <fullyQualifiedTypeName name="com.iiitb.utility.FetchInputFromLineTest1"/>
 <fullyQualifiedTypeName name="java.util.Iterator"/>
+<fullyQualifiedTypeName name="com.iiitb.utility.MergeAccfgTest"/>
+<fullyQualifiedTypeName name="com.iiitb.blocks.Constant"/>
+<fullyQualifiedTypeName name="com.iiitb.blocks.Sum"/>
+<fullyQualifiedTypeName name="expression.Expression"/>
+<fullyQualifiedTypeName name="com.iiitb.utility.ParseXML"/>
+<fullyQualifiedTypeName name="com.iiitb.helper.InPortHelper"/>
+<fullyQualifiedTypeName name="com.iiitb.blocks.InPort"/>
+<fullyQualifiedTypeName name="expression.EqualsExpression"/>
 </qualifiedTypeNameHistroy>

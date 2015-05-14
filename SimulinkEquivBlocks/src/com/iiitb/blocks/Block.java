@@ -1,11 +1,8 @@
 package com.iiitb.blocks;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 import program.IProgram;
 
@@ -52,7 +49,7 @@ public abstract class Block implements IBlock,IProgram {
 	public boolean hasVariable(Variable arg0) {
 		// TODO Auto-generated method stub
 		Set<Variable> checkSet = getVariables();
-		Iterator iter = checkSet.iterator();
+		Iterator<Variable> iter = checkSet.iterator();
 		while (iter.hasNext()) {
 			if (arg0.equals(iter.next())) {
 				return true;

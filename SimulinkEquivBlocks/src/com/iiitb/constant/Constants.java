@@ -12,6 +12,7 @@ public class Constants {
 	public static final String TYPE = "BlockType";
 	
 	public static final String SUB_SYS = "SubSystem";
+	public static final String SUB_SYS_CASE = "Subsystem";
 	
 	public static final String PARA_TAG = "P";
 	public static final String SOURCE = "SrcBlock";
@@ -43,6 +44,10 @@ public class Constants {
 	
 	public static final String MINMAX = "MinMax";
 	public static final String FUNCTION= "Function";
+	
+	
+	public static final String INPORT = "Inport";
+	public static final String PORT= "Port";
 	
 	
 

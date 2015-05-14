@@ -13,6 +13,10 @@ public class Accfg {
 
 	private List<Expression> fp = new ArrayList<Expression>();
 	private List<Expression> delay = new ArrayList<Expression>();
+	
+	
+	
+	
 	public List<Expression> getInit() {
 		return init;
 	}

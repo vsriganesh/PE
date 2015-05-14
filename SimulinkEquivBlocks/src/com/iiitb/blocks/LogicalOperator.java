@@ -6,10 +6,7 @@ import java.util.List;
 import com.iiitb.cfg.Accfg;
 
 import expression.AndExpression;
-import expression.EqualsExpression;
 import expression.Expression;
-import expression.GreaterThanExpression;
-import expression.LesserThanExpression;
 import expression.NotExpression;
 import expression.OrExpression;
 import expression.Variable;

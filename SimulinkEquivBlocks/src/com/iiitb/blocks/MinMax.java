@@ -7,9 +7,7 @@ import java.util.Map;
 
 import com.iiitb.cfg.Accfg;
 
-import expression.DivideExpression;
 import expression.Expression;
-import expression.IExpression;
 import expression.MinMaxExpression;
 import expression.Variable;
 

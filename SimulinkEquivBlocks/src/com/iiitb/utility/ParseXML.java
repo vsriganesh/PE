@@ -21,13 +21,13 @@ import com.iiitb.blocks.Block;
 import com.iiitb.cfg.Accfg;
 import com.iiitb.constant.Constants;
 import com.iiitb.factory.BlockFactory;
-import com.iiitb.sort.TopologicalSort;
 
 public class ParseXML {
 
 	public static int countSubSystem = 0;
 
 	public static Map<String, Accfg> subSystemMap = new HashMap<String, Accfg>();
+	public static Map<String, String> portMap = new HashMap<String, String>();
 
 	// Method returns instance of xml document that can be further parsed
 	public static Document initializeDocument(String filePath) {
@@ -101,7 +101,6 @@ public class ParseXML {
 				tempForProcessing = currSubSystemNode.getChildNodes();
 
 			NodeList tempSubsystemSystemChildren = null;
-		
 
 			for (int tempForProcessingIter = 0; tempForProcessingIter < tempForProcessing
 					.getLength(); tempForProcessingIter++) {
@@ -110,8 +109,7 @@ public class ParseXML {
 						.equals(Constants.SYSTEM)) {
 					tempSubsystemSystemChildren = tempForProcessing.item(
 							tempForProcessingIter).getChildNodes();
-					System.out.println("Length "
-							+ tempSubsystemSystemChildren.getLength());
+
 				}
 
 				else
@@ -141,10 +139,6 @@ public class ParseXML {
 
 			}
 
-		/*	System.out
-					.println("Block Child " + blockChildNodesOfSystemNodeList);
-			System.out.println("Line Child " + lineChildNodesOfSystemNodeList);*/
-
 			for (int nodeIter = 0; nodeIter < blockChildNodesOfSystemNodeList
 					.size(); nodeIter++) {
 
@@ -159,36 +153,56 @@ public class ParseXML {
 								.get(nodeIter);
 						// block type will be "block"
 						// block name will be (for e.g) "constant"
-						blockName = blockName+temp.item(tempIter).getNodeValue();
-						
+						blockName = blockName
+								+ temp.item(tempIter).getNodeValue();
+
 					}
 					if (temp.item(tempIter).getNodeName()
 							.equalsIgnoreCase(Constants.TYPE)) {
-						
+
 						// block type will be "block"
 						// block name will be (for e.g) "constant"
-						if(blockName=="")
-						blockName = temp.item(tempIter).getNodeValue()+"_";
+						if (blockName == "")
+							blockName = temp.item(tempIter).getNodeValue()
+									+ "_";
 						else
-							blockName = temp.item(tempIter).getNodeValue()+"_"+blockName;
-						
+							blockName = temp.item(tempIter).getNodeValue()
+									+ "_" + blockName;
+
 					}
 				}
-				
+
 				if (blockName != "" && blockType != null) {
 
 					if (blockName.startsWith(Constants.SUB_SYS)) {
-						System.out.println("Entered Subsystem");
+
 						countSubSystem++;
-						
+
+						ArrayList<String> tempInputList = new ArrayList<String>();
+
+						// If there are input ports in the subsystem then we got
+						// to find what is to be propagated into the subsystem
+						// This can be done by analysing the <line> of the
+						// current subsystem
+
+						for (int lineIter = 0; lineIter < lineChildNodesOfSystemNodeList
+								.size(); lineIter++) {
+
+							// tempInputList can be used for testing
+							tempInputList.addAll(FetchInputFromLine
+									.parseLineForPort(
+
+									lineChildNodesOfSystemNodeList
+											.get(lineIter).getChildNodes()));
+
+						}
+
 						Accfg accfg = parseDocument(doc, blockType);
-						
-						
+
 						Block block = BlockFactory.generateBlock(blockName,
 								accfg);
 						if (block != null)
 							blockList.add(block);
-						System.out.println(accfg);
 
 					}
 
@@ -196,8 +210,7 @@ public class ParseXML {
 						NodeList attr = blockType.getChildNodes();
 
 						// Simulink blocks to java library blocks
-						//System.out.println("Test " +blockName);
-						//System.out.println("Testing before sending block name "+blockName.split("_", 2)[1]);
+
 						Block block = BlockFactory.generateBlock(blockName,
 								attr);
 						if (block != null)
@@ -212,16 +225,11 @@ public class ParseXML {
 			for (int nodeIter = 0; nodeIter < lineChildNodesOfSystemNodeList
 					.size(); nodeIter++) {
 
-				//System.out.println("Node Iter Value " + lineChildNodesOfSystemNodeList.size());
-
 				// test can be used for any testing purpose
 
-				FetchInputFromLine.parseLine(
-						(ArrayList<Block>) blockList,
+				FetchInputFromLine.parseLine((ArrayList<Block>) blockList,
 						lineChildNodesOfSystemNodeList.get(nodeIter)
 								.getChildNodes());
-				
-				
 
 			}
 
@@ -229,7 +237,7 @@ public class ParseXML {
 
 			// BlockList has all blocks with ACCFG set
 			// Merge based on topological sort and Display
-			System.out.println("blockList size "+blockList.size());
+
 			Accfg retAccfg = MergeAccfg.merge((ArrayList<Block>) blockList);
 
 			/*

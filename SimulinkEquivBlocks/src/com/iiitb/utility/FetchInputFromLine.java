@@ -2,12 +2,10 @@ package com.iiitb.utility;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
@@ -33,7 +31,6 @@ public class FetchInputFromLine {
 		DestNode nodeIni = new DestNode();
 		for (int iter = 0; iter < attributes.getLength(); iter++) {
 
-			
 			if (attributes.item(iter).getNodeName().equalsIgnoreCase("P")
 					|| attributes.item(iter).getNodeName()
 							.equalsIgnoreCase("Branch"))
@@ -96,7 +93,6 @@ public class FetchInputFromLine {
 
 					for (int tempIter = 0; tempIter < temp.getLength(); tempIter++) {
 
-						
 						if (temp.item(tempIter).getNodeValue()
 								.equalsIgnoreCase("SrcBlock")) {
 
@@ -110,7 +106,6 @@ public class FetchInputFromLine {
 							nodeIni.setName(attributes.item(iter)
 									.getTextContent());
 							destNodeTemp.add(nodeIni);
-							
 
 						}
 
@@ -118,7 +113,7 @@ public class FetchInputFromLine {
 						// condition
 						if (temp.item(tempIter).getNodeValue()
 								.equalsIgnoreCase("DstPort")) {
-							
+
 							// Name and port is set
 							destNodeTemp.get(destNodeTemp.indexOf(nodeIni))
 									.setPort(
@@ -201,7 +196,7 @@ public class FetchInputFromLine {
 			if (blockObj.isInputSetFlag()
 					|| destNode.startsWith(Constants.DELAY)) {
 
-				// System.out.println("Entered both input");
+				
 				// Applicable only for delay block. For other blocks input is
 				// set.
 				// Flag to set input based on delay length.
@@ -286,4 +281,115 @@ public class FetchInputFromLine {
 
 	}
 
+	/**
+	 * 
+	 * Fetch the values for port from current subsystem and propagate it into
+	 * inner subsystem
+	 * 
+	 * 
+	 * 
+	 * */
+
+	public static ArrayList<String> parseLineForPort(NodeList attributes) {
+		// TODO Auto-generated method stub
+
+		String sourceNode = "";
+
+		boolean store = false;
+
+		ArrayList<String> tempList = new ArrayList<String>();
+		for (int iter = 0; iter < attributes.getLength(); iter++) {
+
+			if (attributes.item(iter).getNodeName().equalsIgnoreCase("P")
+					|| attributes.item(iter).getNodeName()
+							.equalsIgnoreCase("Branch")) {
+
+				if (attributes.item(iter).getNodeName()
+						.equalsIgnoreCase("Branch")) {
+
+					NodeList branchChildren = attributes.item(iter)
+							.getChildNodes();
+					for (int brTemp = 0; brTemp < branchChildren.getLength(); brTemp++) {
+						if (branchChildren.item(brTemp).getNodeName()
+								.equalsIgnoreCase("P")) {
+
+							NamedNodeMap temp = branchChildren.item(brTemp)
+									.getAttributes();
+
+							for (int tempIter = 0; tempIter < temp.getLength(); tempIter++) {
+
+								if (temp.item(tempIter).getNodeValue()
+										.equalsIgnoreCase("DstBlock")) {
+
+									if (branchChildren.item(brTemp)
+											.getTextContent()
+											.startsWith(Constants.SUB_SYS_CASE)) {
+
+										store = true;
+
+									}
+								}
+
+								if (temp.item(tempIter).getNodeValue()
+										.equalsIgnoreCase("DstPort")) {
+
+									if (store) {
+										tempList.add(sourceNode);
+
+										ParseXML.portMap.put(branchChildren
+												.item(brTemp).getTextContent(),
+												sourceNode);
+										store = false;
+									}
+
+								}
+
+							}
+
+						}
+					}
+
+				}
+
+				else {
+
+					NamedNodeMap temp = attributes.item(iter).getAttributes();
+
+					for (int tempIter = 0; tempIter < temp.getLength(); tempIter++) {
+
+						if (temp.item(tempIter).getNodeValue()
+								.equalsIgnoreCase("SrcBlock")) {
+
+							sourceNode = attributes.item(iter).getTextContent();
+
+						}
+
+						if (temp.item(tempIter).getNodeValue()
+								.equalsIgnoreCase("DstBlock")) {
+
+							if (attributes.item(iter).getTextContent()
+									.startsWith(Constants.SUB_SYS_CASE)) {
+								store = true;
+
+							}
+						}
+						if (temp.item(tempIter).getNodeValue()
+								.equalsIgnoreCase("DstPort")) {
+
+							if (store) {
+								tempList.add(sourceNode);
+								ParseXML.portMap.put(attributes.item(iter)
+										.getTextContent(), sourceNode);
+								store = false;
+							}
+
+						}
+
+					}
+				}
+			}
+
+		}
+		return tempList;
+	}
 }

@@ -1,6 +1,5 @@
 package com.iiitb.test;
 
-import java.util.*;
 
 public class Test {
 

@@ -83,14 +83,14 @@ public class MergeAccfg {
 		 * }
 		 */
 
-		Iterator sortedIter = sortedList.iterator();
+		Iterator<String> sortedIter = sortedList.iterator();
 		
 		String sortFp = "";
 
 		while (sortedIter.hasNext()) {
 			sortFp = (String) sortedIter.next();
 			
-			Iterator iter = blockList.iterator();
+			Iterator<Block> iter = blockList.iterator();
 			while (iter.hasNext()) {
 				Block block = (Block) iter.next();
 				
@@ -140,19 +140,21 @@ public class MergeAccfg {
 		List<Expression> input = new ArrayList<Expression>();
 		List<Expression> output = new ArrayList<Expression>();
 
-		Iterator blockListIter = blockList.iterator();
+		Iterator<Block> blockListIter = blockList.iterator();
 		while (blockListIter.hasNext()) {
 			
 		
 			Block block = (Block) blockListIter.next();
-			System.out.println("Block Name "+((Variable)(block.getOutput())).getName());
-			System.out.println("test "+block.getAccfg());
+			
+			System.out.println("Important Block Name ***************************************"+((Variable)(block.getOutput())).getName());
+			System.out.println("Important test ********************************************* "+block.getAccfg());
+			
 			if(block.getAccfg().getInput()!=null)
 			input.addAll(block.getAccfg().getInput());
-			//System.out.println("Input "+block.getAccfg().getInput());
+			
 			
 			output.addAll(block.getAccfg().getOutput());
-			//System.out.println("Output "+block.getAccfg().getOutput());
+			
 			
 
 		}
@@ -160,12 +162,12 @@ public class MergeAccfg {
 		 System.out.println("Input Final "+input);
 		 System.out.println("Output Final "+output);
 
-		Iterator inputIter = input.iterator();
+		Iterator<Expression> inputIter = input.iterator();
 		String inputVar = "";
 		String outputVar = "";
 		while (inputIter.hasNext()) {
 			inputVar = ((Variable) inputIter.next()).getName();
-			Iterator outputIter = output.iterator();
+			Iterator<Expression> outputIter = output.iterator();
 
 			while (outputIter.hasNext()) {
 
