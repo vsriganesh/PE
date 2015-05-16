@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 
 
-import java.util.HashMap;
+
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -27,9 +27,9 @@ import com.iiitb.constant.Constants;
 import com.iiitb.factory.BlockFactory;
 import com.iiitb.factory.BlockFactoryTest;
 import com.iiitb.utility.FetchInputFromLine;
-import com.iiitb.utility.FetchInputFromLineTest;
+
 import com.iiitb.utility.FetchInputFromLineTest1;
-import com.iiitb.utility.MergeAccfg;
+
 import com.iiitb.utility.MergeAccfgTest;
 import com.iiitb.utility.ParseXML;
 
@@ -335,7 +335,7 @@ public class TestConstantSumBlock {
 					/* Using BlockFactoryUtility and Helper class , necessary attributes
 					 * for java objects corresponding to blocks are set
 					 * 
-					 * Based on the block test if all necessary attributes are set
+					 * Based on the block, test if all necessary attributes are set
 					 *    
 					 * Based on our model there are only 2 block types : Constant,Sum 
 					 * 
@@ -344,7 +344,8 @@ public class TestConstantSumBlock {
 					 *  Constant1: Value is 8
 					 *  
 					 *  Sum: Inputs is ++ and the corresponding key is 1 as per signList
-					 *  map in Sum block (Note:currently this is not used anywhere in code)
+					 *  map in Sum class (Sum Block implementation)
+					 *  (Note:currently this is not used anywhere in code)
 					 *  By default we consider only '++'
 					 */
 					

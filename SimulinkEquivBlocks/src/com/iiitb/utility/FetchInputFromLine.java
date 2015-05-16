@@ -133,9 +133,9 @@ public class FetchInputFromLine {
 		// In a single <line> all attributes are captured.
 
 		// SourceNode and list of destination nodes will be captured
-
+/*
 		System.out.println("sourceNode is " + sourceNode);
-		System.out.println("destination is " + destNodeTemp);
+		System.out.println("destination is " + destNodeTemp);*/
 
 		if (sourceNode != "") {
 

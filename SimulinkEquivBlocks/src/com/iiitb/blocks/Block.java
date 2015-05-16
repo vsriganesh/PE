@@ -32,7 +32,7 @@ public abstract class Block implements IBlock,IProgram {
 	@Override
 	public Variable addVariable(Variable arg0) {
 		// TODO Auto-generated method stub
-			System.out.println("Add variable is called "+arg0);
+			
 		variableSet.add(arg0);
 
 		return arg0;

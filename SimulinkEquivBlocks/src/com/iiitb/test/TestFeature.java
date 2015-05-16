@@ -11,7 +11,7 @@ public class TestFeature {
 		// TODO Auto-generated method stub
 		try {
 			Document doc = ParseXML
-					.initializeDocument("C:/Users/vsriganesh/Documents/MATLAB/sum_subsystem+-.xml");
+					.initializeDocument("C:/Users/vsriganesh/Documents/MATLAB/test2.xml");
 
 			/*
 			 * 

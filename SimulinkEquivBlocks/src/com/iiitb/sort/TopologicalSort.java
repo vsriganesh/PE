@@ -25,13 +25,13 @@ public class TopologicalSort {
 			Map<String, LinkedList<String>> adjacencyList) {
 
 		List<String> rootNodes = new ArrayList<String>();
-		Iterator keySetIter = adjacencyList.keySet().iterator();
+		Iterator<String> keySetIter = adjacencyList.keySet().iterator();
 
 		String key = "";
 		String rootCheck = "";
 		while (keySetIter.hasNext()) {
 			rootCheck = (String) keySetIter.next();
-			Iterator iter = adjacencyList.keySet().iterator();
+			Iterator<String> iter = adjacencyList.keySet().iterator();
 			boolean rootCheckFlag = true;
 			while (iter.hasNext()) {
 				key = (String) iter.next();
@@ -54,7 +54,8 @@ public class TopologicalSort {
 
 	/**
 	 * 
-	 * @param adjacencyList - Subsystem in adjacency list representation
+	 * @param adjacencyList
+	 *            - Subsystem in adjacency list representation
 	 * @return - Returns incoming edge count of each vertex (* Only for vertex
 	 *         that has an outgoing edge)
 	 */
@@ -63,7 +64,7 @@ public class TopologicalSort {
 			Map<String, LinkedList<String>> adjacencyList) {
 
 		Map<String, Integer> countIncoming = new HashMap<String, Integer>();
-		Iterator keySetIter = adjacencyList.keySet().iterator();
+		Iterator<String> keySetIter = adjacencyList.keySet().iterator();
 
 		String key = "";
 		String rootCheck = "";
@@ -71,7 +72,7 @@ public class TopologicalSort {
 		while (keySetIter.hasNext()) {
 			rootCheck = (String) keySetIter.next();
 			incomingCount = 0;
-			Iterator iter = adjacencyList.keySet().iterator();
+			Iterator<String> iter = adjacencyList.keySet().iterator();
 
 			while (iter.hasNext()) {
 				key = (String) iter.next();
@@ -97,76 +98,49 @@ public class TopologicalSort {
 	public ArrayList<String> sortGraph(
 			Map<String, LinkedList<String>> adjacencyList) {
 
-		
-		//System.out.println("Adjacency list "+adjacencyList);
+		// System.out.println("Adjacency list "+adjacencyList);
 		Set<String> delayList = new TreeSet<String>();
-		Iterator testIter = adjacencyList.keySet().iterator();
-		
+		Iterator<String> testIter = adjacencyList.keySet().iterator();
+
 		// To remove delay block as delay block forms cycle
-		
-		while(testIter.hasNext())
-		{
-			String key = (String)testIter.next();
-			//System.out.println("key is "+key);
+
+		while (testIter.hasNext()) {
+			String key = (String) testIter.next();
+
 			List<String> tempList = adjacencyList.get(key);
-			Iterator temp = tempList.iterator();
-			while(temp.hasNext())
-			{
-				String tempDelay = (String)temp.next();
-				if(tempDelay.contains("Delay"))
-						{
-							//delayList.add(tempDelay);
-							temp.remove();	
-					
-						}
+			Iterator<String> temp = tempList.iterator();
+			while (temp.hasNext()) {
+				String tempDelay = (String) temp.next();
+				if (tempDelay.contains("Delay")) {
+
+					temp.remove();
+
+				}
 			}
 		}
-		 testIter = adjacencyList.keySet().iterator();
-		while(testIter.hasNext())
-		{
-			String key = (String)testIter.next();
-			System.out.println("key is "+key);
-			System.out.println("value is "+adjacencyList.get(key));
-			
-		}
-		
-		
+
 		// Identify Root Nodes in the Subsystem
 		List<String> rootNodes = rootNodes(adjacencyList);
 
-		// System.out.println("ROOT NODES ARE : "+rootNodes);
-
 		// Get incoming edge count for each vertex
 		Map<String, Integer> incomingCount = incomingCount(adjacencyList);
-
-		/*
-		 * Iterator incomingCountIter = incomingCount.keySet().iterator();
-		 * while(incomingCountIter.hasNext()) {
-		 * 
-		 * String key = (String)incomingCountIter.next();
-		 * 
-		 * System.out.println("Incoming Edge Count for "+key+" is :"+incomingCount
-		 * .get(key)); }
-		 */
 
 		// Set is used to avoid duplicate entries
 		Set<String> lastNodeList = new TreeSet<String>();
 
 		List<String> sortedList = new ArrayList<String>();
 		String rootNode = "";
-		
+
 		while (!rootNodes.isEmpty()) {
 			rootNode = (String) rootNodes.get(0);
 
-			// System.out.println("Root Node in consideration is "+rootNode);
 			sortedList.add(rootNode);
 			String adjNode = "";
 			int count;
-			Iterator adjNodeList = adjacencyList.get(rootNode).iterator();
+			Iterator<String> adjNodeList = adjacencyList.get(rootNode)
+					.iterator();
 			while (adjNodeList.hasNext()) {
 				adjNode = (String) adjNodeList.next();
-				// System.out.println("The current adj node for "+rootNode+" is "+adjNode
-				// );
 
 				/*
 				 * Ignore this node as this node has no outgoing edges and has
@@ -203,29 +177,22 @@ public class TopologicalSort {
 		// Nodes with no out going edges are added here. These nodes were
 		// initially ignored
 		sortedList.addAll(lastNodeList);
-		
-		
-		
-		
-		System.out.println("delayList : "+delayList);
-		
-		
-		// All delay blocks should be added in the end of sortedList for a subsystem
-		
-		Iterator iter = sortedList.iterator();
-		while(iter.hasNext())
-		{
+
+		// All delay blocks should be added in the end of sortedList for a
+		// subsystem
+
+		Iterator<String> iter = sortedList.iterator();
+		while (iter.hasNext()) {
 			String block = (String) iter.next();
-			if(block.startsWith("Delay"))
-			{
+			if (block.startsWith("Delay")) {
 				delayList.add(block);
 				iter.remove();
-				
+
 			}
 		}
-		
+
 		sortedList.addAll(delayList);
-		
+
 		return (ArrayList<String>) sortedList;
 	}
 }
