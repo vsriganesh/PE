@@ -146,8 +146,8 @@ public class MergeAccfg {
 		
 			Block block = (Block) blockListIter.next();
 			
-			System.out.println("Important Block Name ***************************************"+((Variable)(block.getOutput())).getName());
-			System.out.println("Important test ********************************************* "+block.getAccfg());
+			//System.out.println("Important Block Name ***************************************"+((Variable)(block.getOutput())).getName());
+			//System.out.println("Important test ********************************************* "+block.getAccfg());
 			
 			if(block.getAccfg().getInput()!=null)
 			input.addAll(block.getAccfg().getInput());

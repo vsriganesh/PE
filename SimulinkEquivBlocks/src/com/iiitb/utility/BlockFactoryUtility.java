@@ -32,7 +32,8 @@ public class BlockFactoryUtility {
 	public static void setBlockAttributes(List<String> attrToFetchList,
 			NodeList attributes, Block block) {
 		IHelper helper = null;
-
+		
+		
 		for (String attrToFetch : attrToFetchList) {
 
 			for (int iter = 0; iter < attributes.getLength(); iter++) {
@@ -49,7 +50,7 @@ public class BlockFactoryUtility {
 								.equalsIgnoreCase(attrToFetch)) {
 
 							if (block.getClass() == Constant.class) {
-
+								
 								helper = new ConstHelper();
 								helper.setAttr(attributes, iter, block,
 										attrToFetch);
@@ -116,6 +117,7 @@ public class BlockFactoryUtility {
 							
 							if (block.getClass() == InPort.class) {
 
+								
 								helper = new InPortHelper();
 								helper.setAttr(attributes, iter, block,
 										attrToFetch);

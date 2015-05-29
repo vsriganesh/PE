@@ -15,6 +15,7 @@ import org.w3c.dom.NodeList;
 import com.iiitb.blocks.Block;
 import com.iiitb.blocks.Constant;
 import com.iiitb.blocks.Delay;
+import com.iiitb.blocks.InPort;
 import com.iiitb.blocks.Sum;
 import com.iiitb.blocks.Switch;
 import com.iiitb.constant.Constants;
@@ -137,6 +138,32 @@ public class BlockFactoryTest {
 					block);
 
 		}
+	
+	if (blockName.startsWith(Constants.INPORT)) {
+		block = new InPort(blockName.split("_", 2)[1]);
+		
+		List<String> attrFetchList = new ArrayList<String>(); 
+		attrFetchList.add(Constants.PORT);
+		
+		/* Based on each block type , the attributes to fetch differs 
+		 * 
+		 * Incase of Switch block attributes to fetch are Criteria and Threshold
+		 * 
+		 * 
+		 * */
+		List<String> testList = new ArrayList<String>();
+		testList.add("Port");
+		
+		assertArrayEquals(testList.toArray(), attrFetchList.toArray());
+		
+		
+		BlockFactoryUtility.setBlockAttributes(attrFetchList, attributes,
+				block);
+		
+		
+		
+
+	}
 		return block;
 
 		

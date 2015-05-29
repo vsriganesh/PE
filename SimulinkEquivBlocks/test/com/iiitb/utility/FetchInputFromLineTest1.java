@@ -20,7 +20,7 @@ import org.w3c.dom.NodeList;
 import com.iiitb.blocks.Block;
 import com.iiitb.blocks.Delay;
 import com.iiitb.constant.Constants;
-
+import com.iiitb.testing.TestPortBranchSubsystem;
 import com.iiitb.utility.DestNode;
 
 import expression.Expression;
@@ -448,4 +448,121 @@ public class FetchInputFromLineTest1 {
 		
 	}
 
+	public static ArrayList<String> parseLineForPort(NodeList attributes) {
+		// TODO Auto-generated method stub
+
+		String sourceNode = "";
+
+		boolean store = false;
+
+		ArrayList<String> tempList = new ArrayList<String>();
+		for (int iter = 0; iter < attributes.getLength(); iter++) {
+
+			if (attributes.item(iter).getNodeName().equalsIgnoreCase("P")
+					|| attributes.item(iter).getNodeName()
+							.equalsIgnoreCase("Branch")) {
+
+				if (attributes.item(iter).getNodeName()
+						.equalsIgnoreCase("Branch")) {
+
+					NodeList branchChildren = attributes.item(iter)
+							.getChildNodes();
+					for (int brTemp = 0; brTemp < branchChildren.getLength(); brTemp++) {
+						if (branchChildren.item(brTemp).getNodeName()
+								.equalsIgnoreCase("P")) {
+
+							NamedNodeMap temp = branchChildren.item(brTemp)
+									.getAttributes();
+
+							for (int tempIter = 0; tempIter < temp.getLength(); tempIter++) {
+
+								if (temp.item(tempIter).getNodeValue()
+										.equalsIgnoreCase("DstBlock")) {
+
+									if (branchChildren.item(brTemp)
+											.getTextContent()
+											.startsWith(Constants.SUB_SYS_CASE)) {
+
+										store = true;
+
+									}
+								}
+
+								if (temp.item(tempIter).getNodeValue()
+										.equalsIgnoreCase("DstPort")) {
+
+									if (store) {
+										tempList.add(sourceNode);
+
+										TestPortBranchSubsystem.portMap.put(branchChildren
+												.item(brTemp).getTextContent(),
+												sourceNode);
+										/* We use portMap in ParseXML class because when InPort block is created ,
+										   portMap in ParseXML is referred to setValue()
+										*/
+										ParseXML.portMap.put(branchChildren
+												.item(brTemp).getTextContent(),
+												sourceNode);
+										store = false;
+									}
+
+								}
+
+							}
+
+						}
+					}
+
+				}
+
+				else {
+
+					NamedNodeMap temp = attributes.item(iter).getAttributes();
+
+					for (int tempIter = 0; tempIter < temp.getLength(); tempIter++) {
+
+						if (temp.item(tempIter).getNodeValue()
+								.equalsIgnoreCase("SrcBlock")) {
+
+							sourceNode = attributes.item(iter).getTextContent();
+
+						}
+
+						if (temp.item(tempIter).getNodeValue()
+								.equalsIgnoreCase("DstBlock")) {
+
+							if (attributes.item(iter).getTextContent()
+									.startsWith(Constants.SUB_SYS_CASE)) {
+								store = true;
+
+							}
+						}
+						if (temp.item(tempIter).getNodeValue()
+								.equalsIgnoreCase("DstPort")) {
+
+							if (store) {
+								tempList.add(sourceNode);
+								TestPortBranchSubsystem.portMap.put(attributes.item(iter)
+										.getTextContent(), sourceNode);
+								
+								/* We use portMap in ParseXML class because when InPort block is created ,
+								   portMap in ParseXML is referred to setValue()
+								*/
+								ParseXML.portMap.put(attributes.item(iter)
+										.getTextContent(), sourceNode);
+								store = false;
+							}
+
+						}
+
+					}
+				}
+			}
+
+		}
+		return tempList;
+	}
+	
+	
+	
 }

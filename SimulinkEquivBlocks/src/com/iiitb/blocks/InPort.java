@@ -67,6 +67,7 @@ public class InPort extends Block {
 
 	public void setValue(String value) {
 		setPort(value);
+		this.value = ParseXML.portMap.get(value);
 		try {
 			this.valueFromSubsystem = new Variable(ParseXML.portMap.get(value),this);
 		} catch (Exception e) {
