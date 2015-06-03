@@ -40,6 +40,9 @@ public class OrExpression extends Expression implements IBinaryExpression {
 
 	@Override
 	public String toString() {
+		if(this.output!=null)
 		return this.output+"=(" + this.mLHS.toString() + " OR " + this.mRHS.toString() + ")";
+		else
+			return "(" + this.mLHS.toString() + " OR " + this.mRHS.toString() + ")";
 	}
 }

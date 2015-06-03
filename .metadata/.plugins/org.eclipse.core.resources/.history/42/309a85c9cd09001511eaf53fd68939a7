@@ -157,7 +157,7 @@ public class Switch extends Block {
 			Expression thresh = new Variable(getThreshold(),this);
 			Expression criter = new Variable(getCriteria(),this);
 			Expression thresholdExpr = null;
-			//this.criteria = "GreaterAndEqual";
+			this.criteria = "GreaterAndEqual";
 			if(this.criteria.equalsIgnoreCase("GreaterAndEqual"))
 			{
 				Expression tempGreater = new GreaterThanExpression(this, condInput, thresh,null);

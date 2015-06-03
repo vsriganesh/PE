@@ -154,10 +154,10 @@ public class LogicalOperator extends Block {
 			
 			if(getSign()==4)
 			{
-			Expression tempAnd = new AndExpression(this, lhs, rhs,getOutput());
-			Expression lhsNot = new NotExpression(this, lhs,getOutput());
-			Expression rhsNot = new NotExpression(this, rhs,getOutput());
-			Expression tempLhsRhsAnd = new AndExpression(this, lhsNot, rhsNot,getOutput());
+			Expression tempAnd = new AndExpression(this, lhs, rhs,null);
+			Expression lhsNot = new NotExpression(this, lhs,null);
+			Expression rhsNot = new NotExpression(this, rhs,null);
+			Expression tempLhsRhsAnd = new AndExpression(this, lhsNot, rhsNot,null);
 			
 			
 			return new OrExpression(this, tempAnd, tempLhsRhsAnd,getOutput());
@@ -185,10 +185,10 @@ public class LogicalOperator extends Block {
 			
 				
 			
-				Expression lhsNot = new NotExpression(this, lhs,getOutput());
-				Expression tempAnd = new AndExpression(this, lhsNot, rhs,getOutput());
-				Expression rhsNot = new NotExpression(this, rhs,getOutput());
-				Expression tempLhsRhsAnd = new AndExpression(this, lhs, rhsNot,getOutput());
+				Expression lhsNot = new NotExpression(this, lhs,null);
+				Expression tempAnd = new AndExpression(this, lhsNot, rhs,null);
+				Expression rhsNot = new NotExpression(this, rhs,null);
+				Expression tempLhsRhsAnd = new AndExpression(this, lhs, rhsNot,null);
 				
 				
 				return new OrExpression(this, tempAnd, tempLhsRhsAnd,getOutput());

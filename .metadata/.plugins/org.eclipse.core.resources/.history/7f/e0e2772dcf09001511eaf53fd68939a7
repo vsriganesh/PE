@@ -136,14 +136,14 @@ public class RelationalOperator extends Block {
 			
 			if(getSign()==1)
 			{
-				Expression tempLesser = new LesserThanExpression(this, lhs, rhs,null);
+				Expression tempLesser = new LesserThanExpression(this, lhs, rhs,getOutput());
 				Expression tempEqual = new EqualsExpression(this, lhs, rhs);
 				return( new OrExpression(this, tempLesser, tempEqual,getOutput()));
 			}
 			
 			if(getSign()==2)
 			{
-			Expression tempGreater = new GreaterThanExpression(this, lhs, rhs,null);
+			Expression tempGreater = new GreaterThanExpression(this, lhs, rhs,getOutput());
 			Expression tempEqual = new EqualsExpression(this, lhs, rhs);
 			return( new OrExpression(this, tempGreater, tempEqual,getOutput()));
 			}

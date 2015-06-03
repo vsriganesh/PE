@@ -29,7 +29,10 @@ public class NotExpression extends Expression {
 	
 	@Override
 	public String toString() {
+		if(this.output!=null)
 		return this.output+"=(" + " not " + this.mExpression.toString() + ")";
+		else
+			return "(" + " not " + this.mExpression.toString() + ")";
 	}
 
 }

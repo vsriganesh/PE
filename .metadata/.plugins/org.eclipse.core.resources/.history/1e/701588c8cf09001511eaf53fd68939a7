@@ -1,23 +1,19 @@
 package com.iiitb.blocks;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.iiitb.cfg.Accfg;
 
-import expression.EqualsExpression;
+import expression.AndExpression;
 import expression.Expression;
-import expression.GreaterThanExpression;
-import expression.LesserThanExpression;
 import expression.NotExpression;
 import expression.OrExpression;
 import expression.Variable;
+/** Implementation for AND ,OR,NOT,XNOR */
+public class LogicalOperator extends Block {
 
-public class RelationalOperator extends Block {
-
-	public static final Map<Integer, String> signList = new HashMap<Integer, String>();
+	
 
 	private Expression lhs;
 	private Expression rhs;
@@ -55,8 +51,10 @@ public class RelationalOperator extends Block {
 			setInput1(input);
 
 			try {
-				lhs = new Variable(input, this);
-				if (lhs != null && rhs != null)
+				
+				lhs = new Variable(input,"boolean",this);
+				
+				if ((lhs != null && rhs != null) || getSign()==3)
 					setInputSetFlag(true);
 
 			} catch (Exception e) {
@@ -71,7 +69,7 @@ public class RelationalOperator extends Block {
 			setInput2(input);
 
 			try {
-				rhs = new Variable(input, this);
+				rhs = new Variable(input,"boolean", this);
 				if (lhs != null && rhs != null)
 					setInputSetFlag(true);
 			} catch (Exception e) {
@@ -85,7 +83,9 @@ public class RelationalOperator extends Block {
 	@Override
 	public ArrayList<Expression> getInput() {
 		List<Expression> inputs = new ArrayList<Expression>();
+		if(getLhs()!=null)
 		inputs.add(getLhs());
+		if(getRhs()!=null)
 		inputs.add(getRhs());
 		return (ArrayList<Expression>) inputs;
 	}
@@ -136,40 +136,62 @@ public class RelationalOperator extends Block {
 			
 			if(getSign()==1)
 			{
-				Expression tempLesser = new LesserThanExpression(this, lhs, rhs,null);
-				Expression tempEqual = new EqualsExpression(this, lhs, rhs);
-				return( new OrExpression(this, tempLesser, tempEqual,getOutput()));
+				
+				return( new AndExpression(this, lhs, rhs,getOutput()));
 			}
 			
 			if(getSign()==2)
 			{
-			Expression tempGreater = new GreaterThanExpression(this, lhs, rhs,null);
-			Expression tempEqual = new EqualsExpression(this, lhs, rhs);
-			return( new OrExpression(this, tempGreater, tempEqual,getOutput()));
+			
+			return( new OrExpression(this, lhs, rhs,getOutput()));
 			}
 			
 			if(getSign()==3)
 			{
-			Expression tempLesser = new LesserThanExpression(this, lhs, rhs,getOutput());
-			return(tempLesser);
+			
+			  return(new NotExpression(this,lhs,getOutput()));
 			}
 			
 			if(getSign()==4)
 			{
-			Expression tempGreater = new GreaterThanExpression(this, lhs, rhs,getOutput());
-			return(tempGreater);
+			Expression tempAnd = new AndExpression(this, lhs, rhs,null);
+			Expression lhsNot = new NotExpression(this, lhs,null);
+			Expression rhsNot = new NotExpression(this, rhs,null);
+			Expression tempLhsRhsAnd = new AndExpression(this, lhsNot, rhsNot,getOutput());
+			
+			
+			return new OrExpression(this, tempAnd, tempLhsRhsAnd,getOutput());
+			
+			
+			
 			}
 			
 			if(getSign()==5)
 			{
-			Expression tempEqual = new EqualsExpression(this, lhs, rhs);
-			return(tempEqual);
+			Expression tempOr = new OrExpression(this, lhs, rhs,getOutput());
+			return(new NotExpression(this, tempOr,getOutput()));
 			}
 			
 			if(getSign()==6)
 			{
-			Expression tempEqual = new EqualsExpression(this, lhs, rhs);
+			
+				
+				Expression tempEqual = new AndExpression(this, lhs, rhs,getOutput());
 			return(new NotExpression(this,tempEqual,getOutput()));
+			}
+			
+			if(getSign()==7)
+			{
+			
+				
+			
+				Expression lhsNot = new NotExpression(this, lhs,getOutput());
+				Expression tempAnd = new AndExpression(this, lhsNot, rhs,getOutput());
+				Expression rhsNot = new NotExpression(this, rhs,getOutput());
+				Expression tempLhsRhsAnd = new AndExpression(this, lhs, rhsNot,getOutput());
+				
+				
+				return new OrExpression(this, tempAnd, tempLhsRhsAnd,getOutput());
 			}
 			
 			
@@ -182,7 +204,7 @@ public class RelationalOperator extends Block {
 
 	}
 
-	public RelationalOperator(String blockName) {
+	public LogicalOperator(String blockName) {
 		// TODO Auto-generated constructor stub
 
 		super(blockName);
@@ -191,7 +213,8 @@ public class RelationalOperator extends Block {
 		outputTemp.add(getOutput());
 		accfgObj.setOutput(outputTemp);
 		setAccfg(accfgObj);
-		setSign(2);
+		// By default 'AND'
+		setSign(1);
 
 	}
 

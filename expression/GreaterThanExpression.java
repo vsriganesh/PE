@@ -30,7 +30,10 @@ public class GreaterThanExpression extends Expression implements IBinaryExpressi
 
 	@Override
 	public String toString() {
+		if(this.output!=null)
 		return this.output+"=(" + this.mLHS.toString() + " > " + this.mRHS.toString() + ")";
+		else
+			return "(" + this.mLHS.toString() + " > " + this.mRHS.toString() + ")";
 	}
 
 	@Override
