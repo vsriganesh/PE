@@ -15,7 +15,11 @@ import org.w3c.dom.NodeList;
 import com.iiitb.blocks.Block;
 import com.iiitb.blocks.Constant;
 import com.iiitb.blocks.Delay;
+import com.iiitb.blocks.Divide;
 import com.iiitb.blocks.InPort;
+import com.iiitb.blocks.LogicalOperator;
+import com.iiitb.blocks.MinMax;
+import com.iiitb.blocks.RelationalOperator;
 import com.iiitb.blocks.Sum;
 import com.iiitb.blocks.Switch;
 import com.iiitb.constant.Constants;
@@ -42,6 +46,7 @@ public class BlockFactoryTest {
 	@Test
 	public Block testGenerateBlockStringNodeList(String blockName , NodeList attributes) {
 		Block block = null;
+		System.out.println("block name is "+blockName);
 		if (blockName.startsWith(Constants.CONST)) {
 			block = new Constant(blockName.split("_", 2)[1]);
 			
@@ -80,6 +85,54 @@ public class BlockFactoryTest {
 			testList.add("Inputs");
 			assertArrayEquals(testList.toArray(), attrFetchList.toArray());
 			
+			
+			BlockFactoryUtility.setBlockAttributes(attrFetchList, attributes,
+					block);
+
+		}
+		
+		if (blockName.startsWith(Constants.DIVIDE)) {
+			block = new Divide(blockName.split("_", 2)[1]);
+			
+			List<String> attrFetchList = new ArrayList<String>(); 
+			attrFetchList.add(Constants.INPUT);
+			
+			BlockFactoryUtility.setBlockAttributes(attrFetchList, attributes,
+					block);
+
+		}
+		
+		if (blockName.startsWith(Constants.LOGICAL)) {
+			
+			block = new LogicalOperator(blockName.split("_", 2)[1]);
+			//System.out.println(block);
+			List<String> attrFetchList = new ArrayList<String>(); 
+			attrFetchList.add(Constants.OPERATOR);
+			
+			BlockFactoryUtility.setBlockAttributes(attrFetchList, attributes,
+					block);
+
+		}
+		
+        if (blockName.startsWith(Constants.RELATIONAL)) {
+			
+			block = new RelationalOperator(blockName.split("_", 2)[1]);
+			//System.out.println(block);
+			List<String> attrFetchList = new ArrayList<String>(); 
+			attrFetchList.add(Constants.OPERATOR);
+			
+			BlockFactoryUtility.setBlockAttributes(attrFetchList, attributes,
+					block);
+
+		}
+		
+		if (blockName.startsWith(Constants.MINMAX)) {
+			
+			System.out.println("Inside MinMax block");
+			block = new MinMax(blockName.split("_", 2)[1]);
+			//System.out.println(block);
+			List<String> attrFetchList = new ArrayList<String>(); 
+			attrFetchList.add(Constants.FUNCTION);
 			
 			BlockFactoryUtility.setBlockAttributes(attrFetchList, attributes,
 					block);

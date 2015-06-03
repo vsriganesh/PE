@@ -12,7 +12,7 @@ public class TestFeature {
 		// TODO Auto-generated method stub
 		try {
 			Document doc = ParseXML
-					.initializeDocument("C:/Users/vsriganesh/Documents/MATLAB/test1_xml_test.xml");
+					.initializeDocument("C:\\Users\\vsriganesh\\Documents\\MATLAB\\constantSwitch.xml");
 
 			/*
 			 * 

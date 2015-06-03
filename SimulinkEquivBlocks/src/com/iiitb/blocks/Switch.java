@@ -166,7 +166,7 @@ public class Switch extends Block {
 				
 			}
 				else
-			thresholdExpr = new GreaterThanExpression(this, condInput, thresh,getOutput());
+			thresholdExpr = new GreaterThanExpression(this, condInput, thresh,null);
 			
 			
 			return( (new SwitchExpression(this, lhs, rhs,condInput,getOutput(),getCriteria(),getThreshold(),thresh,criter,thresholdExpr)));
