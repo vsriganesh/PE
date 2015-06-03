@@ -74,7 +74,7 @@ public class BlockFactory {
 		
 	if (blockName.startsWith(Constants.SWITCH)) {
 			
-			System.out.println("Entered for switch step1");
+			
 			
 			block = new Switch(blockName.split("_", 2)[1]);
 			

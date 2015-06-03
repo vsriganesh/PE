@@ -136,19 +136,19 @@ public class LogicalOperator extends Block {
 			
 			if(getSign()==1)
 			{
-				
+				setExpressionSet(true);
 				return( new AndExpression(this, lhs, rhs,getOutput()));
 			}
 			
 			if(getSign()==2)
 			{
-			
+				setExpressionSet(true);
 			return( new OrExpression(this, lhs, rhs,getOutput()));
 			}
 			
 			if(getSign()==3)
 			{
-			
+				setExpressionSet(true);
 			  return(new NotExpression(this,lhs,getOutput()));
 			}
 			
@@ -159,7 +159,7 @@ public class LogicalOperator extends Block {
 			Expression rhsNot = new NotExpression(this, rhs,null);
 			Expression tempLhsRhsAnd = new AndExpression(this, lhsNot, rhsNot,null);
 			
-			
+			setExpressionSet(true);
 			return new OrExpression(this, tempAnd, tempLhsRhsAnd,getOutput());
 			
 			
@@ -169,6 +169,7 @@ public class LogicalOperator extends Block {
 			if(getSign()==5)
 			{
 			Expression tempOr = new OrExpression(this, lhs, rhs,getOutput());
+			setExpressionSet(true);
 			return(new NotExpression(this, tempOr,getOutput()));
 			}
 			
@@ -177,6 +178,7 @@ public class LogicalOperator extends Block {
 			
 				
 				Expression tempEqual = new AndExpression(this, lhs, rhs,getOutput());
+				setExpressionSet(true);
 			return(new NotExpression(this,tempEqual,getOutput()));
 			}
 			
@@ -190,7 +192,7 @@ public class LogicalOperator extends Block {
 				Expression rhsNot = new NotExpression(this, rhs,null);
 				Expression tempLhsRhsAnd = new AndExpression(this, lhs, rhsNot,null);
 				
-				
+				setExpressionSet(true);
 				return new OrExpression(this, tempAnd, tempLhsRhsAnd,getOutput());
 			}
 			
@@ -199,7 +201,7 @@ public class LogicalOperator extends Block {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		setExpressionSet(true);
 		return null;
 
 	}

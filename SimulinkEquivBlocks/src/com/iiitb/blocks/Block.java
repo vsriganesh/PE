@@ -20,13 +20,21 @@ public abstract class Block implements IBlock,IProgram {
 	private int sign;
 	private Accfg accfg;
 
-	boolean inputSetFlag;
+	boolean inputSetFlag = false;
 	
-	
+	boolean expressionSet = false;
 	
 	
 	// Methods overridden for IProgram  - STARTS
 	
+	public boolean isExpressionSet() {
+		return expressionSet;
+	}
+
+	public void setExpressionSet(boolean expressionSet) {
+		this.expressionSet = expressionSet;
+	}
+
 	Set<Variable> variableSet = new HashSet<Variable>();
 	
 	@Override

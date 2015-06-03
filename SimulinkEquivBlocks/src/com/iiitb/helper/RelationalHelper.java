@@ -11,7 +11,7 @@ public class RelationalHelper implements IHelper {
 	public void setAttr(NodeList attributes, int iter, Block block,String attrToFetch) {
 		// TODO Auto-generated method stub
 		
-		System.out.println("In Relational Block "+attributes.item(iter).getTextContent());
+		
 		if (attributes.item(iter).getTextContent()
 				.contains("<=")) {
 			block.setSign(1);

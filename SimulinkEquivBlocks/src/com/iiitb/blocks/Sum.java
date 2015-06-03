@@ -48,16 +48,22 @@ public class Sum extends Block {
 
 		signList.put(1, "++");
 		signList.put(2, "+-");
-		signList.put(3, "--");
+		signList.put(3, "-+");
+		
+		// -- is not implemented
+		signList.put(4, "--");
 
 	}
 
 	@Override
 	public void setInput(String input,String port) {
-		if (this.input1 == null || this.input1 == "") {
+		if (port.equalsIgnoreCase("1")) {
+			
 			setInput1(input);
 			try {
 				lhs = new Variable(input, this);
+				if (lhs != null && rhs != null)
+					setInputSetFlag(true);
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -67,9 +73,11 @@ public class Sum extends Block {
 
 		} else {
 			setInput2(input);
-			setInputSetFlag(true);
+			
 			try {
 				rhs = new Variable(input, this);
+				if (lhs != null && rhs != null)
+					setInputSetFlag(true);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -128,15 +136,28 @@ public class Sum extends Block {
 
 		
 		try {
-			
-			
+			if(getSign() == 1){
+				setExpressionSet(true);
 			return((new AddExpression(this, lhs, rhs,getOutput(),getSign())));
+			}
+			
+			else if(getSign() == 2)
+			{
+				setExpressionSet(true);	
+				return((new AddExpression(this, lhs, rhs,getOutput(),getSign())));
+			}
+			else
+			{
+				setExpressionSet(true);
+				return((new AddExpression(this, rhs, lhs,getOutput(),getSign())));
+			}
+				
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		
+		setExpressionSet(true);
 		return null;
 
 	}

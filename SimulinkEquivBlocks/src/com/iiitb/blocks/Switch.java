@@ -20,9 +20,9 @@ public class Switch extends Block {
 
 	
 	// Inputs for switch
-	private Expression lhs;
-	private Expression rhs;
-	private Expression condInput;
+	private Expression lhs = null;
+	private Expression rhs = null;
+	private Expression condInput = null;
 	
 	// Attributes captured for switch block
 	private String criteria;
@@ -64,14 +64,17 @@ public class Switch extends Block {
 			try {
 				lhs = new Variable(input, this);
 				if(rhs!=null && condInput!=null)
+				{
 						setInputSetFlag(true);
+						
+				}
 				
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			// System.out.println("Input1 is set");
+			
 
 		} else if(port.equalsIgnoreCase("3")){
 			setInput2(input);
@@ -79,12 +82,16 @@ public class Switch extends Block {
 			try {
 				rhs = new Variable(input, this);
 				if(lhs!=null && condInput!=null)
+				{
 					setInputSetFlag(true);
+				
+				
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			// System.out.println("Input2 is set");
+		
 		}
 		
 		else
@@ -93,7 +100,10 @@ public class Switch extends Block {
 			try {
 				condInput = new Variable(input, this);
 				if(lhs!=null && rhs!=null)
+				{
 					setInputSetFlag(true);
+					
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -168,14 +178,14 @@ public class Switch extends Block {
 				else
 			thresholdExpr = new GreaterThanExpression(this, condInput, thresh,null);
 			
-			
+			setExpressionSet(true);
 			return( (new SwitchExpression(this, lhs, rhs,condInput,getOutput(),getCriteria(),getThreshold(),thresh,criter,thresholdExpr)));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		
+		setExpressionSet(true);
 		return null;
 
 	}

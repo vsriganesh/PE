@@ -54,14 +54,15 @@ public class Delay extends Block {
 			List<Expression> initExpression = new ArrayList<Expression>();
 			initExpression.add(new ConcreteConstant(getInitialValue(), this, getOutput()));
 			getAccfg().setInit(initExpression);
+			setExpressionSet(true);
 			return (new EqualsExpression(this,getOutput(),getInp()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		// return null
 		
+		setExpressionSet(true);
 		return null;
 	}
 

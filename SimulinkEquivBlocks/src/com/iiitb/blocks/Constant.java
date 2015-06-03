@@ -67,6 +67,7 @@ public class Constant extends Block {
 
 		Variable retVar = null;
 		try {
+			setExpressionSet(true);
 			return new ConcreteConstant(Integer.parseInt(getValue()), this,getOutput());
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
@@ -76,10 +77,10 @@ public class Constant extends Block {
 			e.printStackTrace();
 		}
 
-		// return null
+		setExpressionSet(true);
 		return retVar;
 
-		// return getName() + "=" + getValue();
+		
 
 	}
 

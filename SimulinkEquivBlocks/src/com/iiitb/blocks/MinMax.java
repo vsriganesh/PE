@@ -103,14 +103,14 @@ public class MinMax extends Block {
 	public Expression expression() {
 
 		try {
-				
+			setExpressionSet(true);	
 			return ((new MinMaxExpression(this, inputList, getOutput(),
 					getSign())));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		setExpressionSet(true);
 		return null;
 
 	}

@@ -12,6 +12,8 @@ import org.w3c.dom.NodeList;
 
 import com.iiitb.blocks.Block;
 import com.iiitb.blocks.Delay;
+import com.iiitb.blocks.RelationalOperator;
+import com.iiitb.blocks.Switch;
 import com.iiitb.constant.Constants;
 
 import expression.Expression;
@@ -193,8 +195,8 @@ public class FetchInputFromLine {
 
 			Block blockObj = blockListIter.next();
 
-			if (blockObj.isInputSetFlag()
-					|| destNode.startsWith(Constants.DELAY)) {
+			if ((blockObj.isInputSetFlag() && !blockObj.isExpressionSet())
+					|| destNode.startsWith(Constants.DELAY) ) {
 
 				
 				// Applicable only for delay block. For other blocks input is
@@ -223,7 +225,10 @@ public class FetchInputFromLine {
 				input = blockObj.getInput();
 				blockObj.getAccfg().setInput(input);
 				List<Expression> expr = new ArrayList<Expression>();
-
+				/*if(blockObj.getClass()==Switch.class)
+				{
+					System.out.println("Check for switch call "+blockObj.getOutput());
+				}*/
 				expr.add(blockObj.expression());
 
 				/*

@@ -19,10 +19,15 @@ public class SumHelper implements IHelper {
 				.contains("+-")) {
 			block.setSign(2);
 		}
+		
+		else if (attributes.item(iter).getTextContent().replaceAll("|", "")
+				.contains("-+")) {
+			block.setSign(3);
+		}
 
 		else {
 
-			block.setSign(3);
+			block.setSign(4);
 		}
 	}
 }

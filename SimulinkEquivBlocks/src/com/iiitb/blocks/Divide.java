@@ -127,14 +127,14 @@ public class Divide extends Block {
 	public Expression expression() {
 
 		try {
-
+			setExpressionSet(true);
 			return ((new DivideExpression(this, lhs, rhs, getOutput(),
 					getSign())));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		setExpressionSet(true);
 		return null;
 
 	}

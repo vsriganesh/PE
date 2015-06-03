@@ -8,6 +8,7 @@ import java.util.Map;
 import com.iiitb.cfg.Accfg;
 
 import expression.EqualsExpression;
+import expression.EqualsRelationalExpression;
 import expression.Expression;
 import expression.GreaterThanExpression;
 import expression.LesserThanExpression;
@@ -132,12 +133,13 @@ public class RelationalOperator extends Block {
 
 		try {
 			
-			System.out.println("******************************************* "+getSign());
+		
 			
 			if(getSign()==1)
 			{
 				Expression tempLesser = new LesserThanExpression(this, lhs, rhs,null);
 				Expression tempEqual = new EqualsExpression(this, lhs, rhs);
+				setExpressionSet(true);
 				return( new OrExpression(this, tempLesser, tempEqual,getOutput()));
 			}
 			
@@ -145,30 +147,35 @@ public class RelationalOperator extends Block {
 			{
 			Expression tempGreater = new GreaterThanExpression(this, lhs, rhs,null);
 			Expression tempEqual = new EqualsExpression(this, lhs, rhs);
+			setExpressionSet(true);
 			return( new OrExpression(this, tempGreater, tempEqual,getOutput()));
 			}
 			
 			if(getSign()==3)
 			{
 			Expression tempLesser = new LesserThanExpression(this, lhs, rhs,getOutput());
+			setExpressionSet(true);
 			return(tempLesser);
 			}
 			
 			if(getSign()==4)
 			{
 			Expression tempGreater = new GreaterThanExpression(this, lhs, rhs,getOutput());
+			setExpressionSet(true);
 			return(tempGreater);
 			}
 			
 			if(getSign()==5)
 			{
-			Expression tempEqual = new EqualsExpression(this, lhs, rhs);
+			Expression tempEqual = new EqualsRelationalExpression(this, lhs, rhs,getOutput());
+			setExpressionSet(true);
 			return(tempEqual);
 			}
 			
 			if(getSign()==6)
 			{
 			Expression tempEqual = new EqualsExpression(this, lhs, rhs);
+			setExpressionSet(true);
 			return(new NotExpression(this,tempEqual,getOutput()));
 			}
 			
@@ -177,7 +184,7 @@ public class RelationalOperator extends Block {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		setExpressionSet(true);
 		return null;
 
 	}

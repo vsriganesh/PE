@@ -81,6 +81,7 @@ public class InPort extends Block {
 
 		Variable retVar = null;
 		try {
+			setExpressionSet(true);
 			return new EqualsExpression(this,getOutput(),this.valueFromSubsystem);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
@@ -91,6 +92,7 @@ public class InPort extends Block {
 		}
 
 		// return null
+		setExpressionSet(true);
 		return retVar;
 
 		
