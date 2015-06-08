@@ -312,7 +312,7 @@ public class TestConstantSumBlock {
 								.parseLineForPort(
 
 								lineChildNodesOfSystemNodeList
-										.get(lineIter).getChildNodes()));
+										.get(lineIter).getChildNodes(),blockName.split("_", 2)[1]));
 
 					}
 

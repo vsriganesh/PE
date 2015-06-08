@@ -70,11 +70,15 @@ public class Subsystem extends Block{
 		// Set to access in expression() method
 		setAccfg(accfg);
 		
+		
+		
+		
 		Accfg accfgLocal = new Accfg();
 		accfgLocal.setFp(accfg.getFp());
 		
 		accfgLocal.getFp().add(expression());
-
+		accfgLocal.setDelay(accfg.getDelay());
+		accfgLocal.setInit(accfg.getInit());
 		accfgLocal.setInput(inputList);
 
 		// Set output as block name

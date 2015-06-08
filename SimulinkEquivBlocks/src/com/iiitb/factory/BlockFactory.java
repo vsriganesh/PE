@@ -36,6 +36,8 @@ public class BlockFactory {
 		
 		Block block = null;
 		if (blockName.startsWith(Constants.CONST)) {
+			
+			
 			block = new Constant(blockName.split("_", 2)[1]);
 			
 			List<String> attrFetchList = new ArrayList<String>(); 
@@ -60,7 +62,6 @@ public class BlockFactory {
 		
 		if (blockName.startsWith(Constants.DELAY)) {
 			
-			System.out.println("Entered for delay step1");
 			
 			block = new Delay(blockName.split("_", 2)[1]);
 			List<String> attrFetchList = new ArrayList<String>(); 

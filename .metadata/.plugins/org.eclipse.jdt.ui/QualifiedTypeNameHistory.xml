@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction"/>
 <fullyQualifiedTypeName name="expression.ConcreteConstant"/>
 <fullyQualifiedTypeName name="expression.Variable"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="com.iiitb.blocks.Switch"/>
 <fullyQualifiedTypeName name="com.iiitb.helper.SwitchHelper"/>
 <fullyQualifiedTypeName name="expression.GreaterThanExpression"/>
 <fullyQualifiedTypeName name="expression.SwitchExpression"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="com.iiitb.utility.FetchInputFromLineSubsystem"/>
 <fullyQualifiedTypeName name="com.iiitb.utility.MergeAccfgTestSubsystem"/>
 <fullyQualifiedTypeName name="com.iiitb.utility.DestNode"/>
+<fullyQualifiedTypeName name="com.iiitb.blocks.Switch"/>
+<fullyQualifiedTypeName name="expression.EqualsRelationalExpression"/>
 </qualifiedTypeNameHistroy>

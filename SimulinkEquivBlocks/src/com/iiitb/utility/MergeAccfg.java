@@ -60,28 +60,7 @@ public class MergeAccfg {
 		  System.out.println("Sorted List "+sortedList);
 		
 		
-		
-		/*
-		 * while (iter.hasNext()) {
-		 * 
-		 * Block block = (Block) iter.next(); if
-		 * (block.getAccfg().getInput().isEmpty()) {
-		 * fpList.addAll(block.getAccfg().getFp());
-		 * 
-		 * } else continue;
-		 * 
-		 * }
-		 * 
-		 * iter = blockList.iterator(); while (iter.hasNext()) { Block block =
-		 * (Block) iter.next(); if
-		 * (block.getName().equalsIgnoreCase(Constants.SUM)) {
-		 * 
-		 * fpList.addAll(block.getAccfg().getFp());
-		 * 
-		 * }
-		 * 
-		 * }
-		 */
+
 
 		Iterator<String> sortedIter = sortedList.iterator();
 		
@@ -99,6 +78,7 @@ public class MergeAccfg {
 					
 					fpList.addAll(block.getAccfg().getFp());
 					initList.addAll(block.getAccfg().getInit());
+					delayList.addAll(block.getAccfg().getDelay());
 					/*For Delay block with delay_length >1 , first individual delay components
 					 * are added to delayList*/
 					if(sortFp.startsWith(Constants.DELAY))

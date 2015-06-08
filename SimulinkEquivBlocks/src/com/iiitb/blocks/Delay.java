@@ -15,7 +15,7 @@ public class Delay extends Block {
 
 	// Attributes to be captured
 	private int initialValue;
-	private int delayLength;
+	private int delayLength = 2;
 	
 	//Input
 	private Expression inp;

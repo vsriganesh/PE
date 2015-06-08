@@ -25,6 +25,8 @@ public class FetchInputFromLine {
 	public static void parseLine(ArrayList<Block> blockList, NodeList attributes) {
 		// TODO Auto-generated method stub
 
+		
+		boolean delaySet = false;
 		String sourceNode = "";
 		String destNode = "";
 		List<DestNode> destNodeTemp = new LinkedList<DestNode>();
@@ -176,7 +178,8 @@ public class FetchInputFromLine {
 						// input is based on delay length
 						if (!destNode.startsWith(Constants.DELAY))
 							blockObj.setInput(sourceNode, destPort);
-
+						else
+							delaySet = true;
 						// System.out.println("Super ");
 					}
 				}
@@ -195,8 +198,12 @@ public class FetchInputFromLine {
 
 			Block blockObj = blockListIter.next();
 
+		/*	System.out.println("blockObj "+blockObj);
+			System.out.println("blockObj input flag "+blockObj.isInputSetFlag());
+			System.out.println("blockObj expression flag "+!blockObj.isExpressionSet());*/
+			
 			if ((blockObj.isInputSetFlag() && !blockObj.isExpressionSet())
-					|| destNode.startsWith(Constants.DELAY) ) {
+					|| (((Variable) blockObj.getOutput()).getName().startsWith(Constants.DELAY) && delaySet) ) {
 
 				
 				// Applicable only for delay block. For other blocks input is
@@ -208,7 +215,12 @@ public class FetchInputFromLine {
 				boolean flag = false;
 				if (((Variable) blockObj.getOutput()).getName().startsWith(
 						Constants.DELAY)) {
+					
+					
 					if (((Delay) blockObj).getDelayLength() > 1) {
+						
+						
+						
 						blockObj.setInput(
 								((Variable) blockObj.getOutput()).getName()
 										+ "_"
@@ -229,6 +241,11 @@ public class FetchInputFromLine {
 				{
 					System.out.println("Check for switch call "+blockObj.getOutput());
 				}*/
+				
+
+				
+				
+				
 				expr.add(blockObj.expression());
 
 				/*
@@ -295,7 +312,7 @@ public class FetchInputFromLine {
 	 * 
 	 * */
 
-	public static ArrayList<String> parseLineForPort(NodeList attributes) {
+	public static ArrayList<String> parseLineForPort(NodeList attributes , String subSystemName) {
 		// TODO Auto-generated method stub
 
 		String sourceNode = "";
@@ -328,7 +345,7 @@ public class FetchInputFromLine {
 
 									if (branchChildren.item(brTemp)
 											.getTextContent()
-											.startsWith(Constants.SUB_SYS_CASE)) {
+											.equalsIgnoreCase(subSystemName)) {
 
 										store = true;
 
@@ -366,14 +383,16 @@ public class FetchInputFromLine {
 								.equalsIgnoreCase("SrcBlock")) {
 
 							sourceNode = attributes.item(iter).getTextContent();
+							
+						
 
 						}
 
 						if (temp.item(tempIter).getNodeValue()
 								.equalsIgnoreCase("DstBlock")) {
-
+						
 							if (attributes.item(iter).getTextContent()
-									.startsWith(Constants.SUB_SYS_CASE)) {
+									.equalsIgnoreCase(subSystemName)) {
 								store = true;
 
 							}
@@ -385,6 +404,8 @@ public class FetchInputFromLine {
 								tempList.add(sourceNode);
 								ParseXML.portMap.put(attributes.item(iter)
 										.getTextContent(), sourceNode);
+								
+								
 								store = false;
 							}
 

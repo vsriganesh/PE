@@ -188,12 +188,12 @@ public class ParseXML {
 						for (int lineIter = 0; lineIter < lineChildNodesOfSystemNodeList
 								.size(); lineIter++) {
 
-							// tempInputList can be used for testing
+														// tempInputList can be used for testing
 							tempInputList.addAll(FetchInputFromLine
 									.parseLineForPort(
 
 									lineChildNodesOfSystemNodeList
-											.get(lineIter).getChildNodes()));
+											.get(lineIter).getChildNodes(),blockName.split("_", 2)[1]));
 
 						}
 
@@ -220,6 +220,10 @@ public class ParseXML {
 
 			}
 
+			
+	
+			
+			
 			// Setting input to block object's ACCFG based on line tags
 
 			for (int nodeIter = 0; nodeIter < lineChildNodesOfSystemNodeList
