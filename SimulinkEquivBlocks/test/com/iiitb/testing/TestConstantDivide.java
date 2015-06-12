@@ -311,7 +311,7 @@ public class TestConstantDivide {
 							.size(); lineIter++) {
 
 						// tempInputList can be used for testing
-						tempInputList.addAll(FetchInputFromLine
+						tempInputList.addAll(FetchInputFromLineDivide
 								.parseLineForPort(
 
 								lineChildNodesOfSystemNodeList

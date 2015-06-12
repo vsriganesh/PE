@@ -447,7 +447,7 @@ public class FetchInputFromLineDivide {
 		
 	}
 
-	public static ArrayList<String> parseLineForPort(NodeList attributes) {
+	public static ArrayList<String> parseLineForPort(NodeList attributes , String subSystemName) {
 		// TODO Auto-generated method stub
 
 		String sourceNode = "";
@@ -480,7 +480,7 @@ public class FetchInputFromLineDivide {
 
 									if (branchChildren.item(brTemp)
 											.getTextContent()
-											.startsWith(Constants.SUB_SYS_CASE)) {
+											.equalsIgnoreCase(subSystemName)) {
 
 										store = true;
 
@@ -531,7 +531,7 @@ public class FetchInputFromLineDivide {
 								.equalsIgnoreCase("DstBlock")) {
 
 							if (attributes.item(iter).getTextContent()
-									.startsWith(Constants.SUB_SYS_CASE)) {
+									.equalsIgnoreCase(subSystemName)) {
 								store = true;
 
 							}

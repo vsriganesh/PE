@@ -1,6 +1,7 @@
 package com.iiitb.cfg;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import expression.Expression;
@@ -59,8 +60,20 @@ public class Accfg {
 		 toRetTemp.append("Input : " + getInput());
 		 toRetTemp.append("\n");
 		 toRetTemp.append("Output : " + getOutput());
-		 toRetTemp.append("\n");
-		 toRetTemp.append("FP : " + getFp().toString());
+		 toRetTemp.append("\n\n");
+		 toRetTemp.append("FP List : \n\n");
+		 Iterator<Expression> fpIter = getFp().iterator();
+		int i =0;
+		 while(fpIter.hasNext())
+		 {
+				
+				
+			 toRetTemp.append(fpIter.next());
+		
+			 toRetTemp.append("\n\n");
+			 i++;
+		 }
+		 
 		 toRetTemp.append("\n");
 		 toRetTemp.append("Delay : " + getDelay().toString());
 		 return toRetTemp.toString();

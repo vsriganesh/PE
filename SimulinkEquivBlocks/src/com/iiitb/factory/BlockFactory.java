@@ -19,6 +19,7 @@ import com.iiitb.blocks.Switch;
 import com.iiitb.cfg.Accfg;
 import com.iiitb.constant.Constants;
 import com.iiitb.utility.BlockFactoryUtility;
+import com.iiitb.utility.ParseXML;
 
 public class BlockFactory {
 
@@ -38,7 +39,7 @@ public class BlockFactory {
 		if (blockName.startsWith(Constants.CONST)) {
 			
 			
-			block = new Constant(blockName.split("_", 2)[1]);
+			block = new Constant(blockName.split("_", 2)[1]+"_SubSystem_"+ParseXML.countSubSystem);
 			
 			List<String> attrFetchList = new ArrayList<String>(); 
 			attrFetchList.add(Constants.VALUE);
@@ -50,7 +51,7 @@ public class BlockFactory {
 		}
 
 		if (blockName.startsWith(Constants.SUM)) {
-			block = new Sum(blockName.split("_", 2)[1]);
+			block = new Sum(blockName.split("_", 2)[1]+"_SubSystem_"+ParseXML.countSubSystem);
 			
 			List<String> attrFetchList = new ArrayList<String>(); 
 			attrFetchList.add(Constants.INPUT);
@@ -63,7 +64,7 @@ public class BlockFactory {
 		if (blockName.startsWith(Constants.DELAY)) {
 			
 			
-			block = new Delay(blockName.split("_", 2)[1]);
+			block = new Delay(blockName.split("_", 2)[1]+"_SubSystem_"+ParseXML.countSubSystem);
 			List<String> attrFetchList = new ArrayList<String>(); 
 			attrFetchList.add(Constants.IC);
 			attrFetchList.add(Constants.DELAY_LENGTH);
@@ -77,7 +78,7 @@ public class BlockFactory {
 			
 			
 			
-			block = new Switch(blockName.split("_", 2)[1]);
+			block = new Switch(blockName.split("_", 2)[1]+"_SubSystem_"+ParseXML.countSubSystem);
 			
 			List<String> attrFetchList = new ArrayList<String>(); 
 			attrFetchList.add(Constants.CRITERIA);
@@ -90,7 +91,7 @@ public class BlockFactory {
 	
 	
 	if (blockName.startsWith(Constants.DIVIDE)) {
-		block = new Divide(blockName.split("_", 2)[1]);
+		block = new Divide(blockName.split("_", 2)[1]+"_SubSystem_"+ParseXML.countSubSystem);
 		
 		List<String> attrFetchList = new ArrayList<String>(); 
 		attrFetchList.add(Constants.INPUT);
@@ -101,7 +102,7 @@ public class BlockFactory {
 	}
 	
 	if (blockName.startsWith(Constants.RELATIONAL)) {
-		block = new RelationalOperator(blockName.split("_", 2)[1]);
+		block = new RelationalOperator(blockName.split("_", 2)[1]+"_SubSystem_"+ParseXML.countSubSystem);
 		
 		List<String> attrFetchList = new ArrayList<String>(); 
 		attrFetchList.add(Constants.OPERATOR);
@@ -112,7 +113,7 @@ public class BlockFactory {
 	}
 	
 	if (blockName.startsWith(Constants.LOGICAL)) {
-		block = new LogicalOperator(blockName.split("_", 2)[1]);
+		block = new LogicalOperator(blockName.split("_", 2)[1]+"_SubSystem_"+ParseXML.countSubSystem);
 		
 		List<String> attrFetchList = new ArrayList<String>(); 
 		attrFetchList.add(Constants.OPERATOR);
@@ -124,7 +125,7 @@ public class BlockFactory {
 	
 	
 	if (blockName.startsWith(Constants.MINMAX)) {
-		block = new MinMax(blockName.split("_", 2)[1]);
+		block = new MinMax(blockName.split("_", 2)[1]+"_SubSystem_"+ParseXML.countSubSystem);
 		
 		List<String> attrFetchList = new ArrayList<String>(); 
 		attrFetchList.add(Constants.FUNCTION);
@@ -136,7 +137,7 @@ public class BlockFactory {
 	}
 	
 	if (blockName.startsWith(Constants.INPORT)) {
-		block = new InPort(blockName.split("_", 2)[1]);
+		block = new InPort(blockName.split("_", 2)[1]+"_SubSystem_"+ParseXML.countSubSystem);
 		
 		List<String> attrFetchList = new ArrayList<String>(); 
 		attrFetchList.add(Constants.PORT);
@@ -159,8 +160,8 @@ public class BlockFactory {
 	public static Block generateBlock(String blockName, Accfg accfg) {
 		Block block = null;
 		if (blockName.startsWith(Constants.SUB_SYS)) {
-			System.out.println("subsystem block name is "+blockName);
-			block = new Subsystem(accfg, blockName.split("_", 2)[1]);
+			
+			block = new Subsystem(accfg, blockName.split("_", 2)[1]+"_SubSystem_"+ParseXML.countSubSystem);
 
 		}
 		return block;

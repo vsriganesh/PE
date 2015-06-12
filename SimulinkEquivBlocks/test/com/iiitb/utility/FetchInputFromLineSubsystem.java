@@ -73,6 +73,58 @@ public class FetchInputFromLineSubsystem {
 			
 			// Branch is applicable incase of parent subsystem
 			
+			
+			// NOTE : Only branches of below type is parsed
+			/*<Line>
+			<P Name="SrcBlock">Constant1</P>
+
+			<Branch>
+  				<P Name="ZOrder">6</P>
+  				<P Name="Points">[100, 0; 0, 41; 160, 0]</P>
+  				<P Name="DstBlock">Sum</P>
+  				<P Name="DstPort">2</P>
+			</Branch>
+			
+			<Branch>
+  				<P Name="ZOrder">5</P>
+  				<P Name="Points">[0, -30]</P>
+  				<P Name="DstBlock">Subsystem</P>
+  				<P Name="DstPort">2</P>
+			</Branch>	
+  
+  				</Line>
+			
+			
+			*/
+		/*	
+			Branches of following type is not parsed 
+			
+			<Line>
+			
+				<P Name="SrcBlock">Constant1</P>
+			<Branch>
+				<P Name="ZOrder">6</P>
+			  
+			  <Branch>
+				<P Name="ZOrder">6</P>
+				<P Name="Points">[100, 0; 0, 41; 160, 0]</P>
+				<P Name="DstBlock">Sum</P>
+				<P Name="DstPort">2</P>
+			  </Branch>
+				
+				<P Name="Points">[0, -30]</P>
+  				<P Name="DstBlock">Subsystem</P>
+  				<P Name="DstPort">2</P>
+  				
+  			</Branch>
+  			
+  			</Line>*/
+				
+			
+			
+			
+			
+			
 			if (attributes.item(iter).getNodeName().equalsIgnoreCase("P")
 					|| attributes.item(iter).getNodeName()
 							.equalsIgnoreCase("Branch"))

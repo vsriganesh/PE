@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="expression.ConcreteConstant"/>
-<fullyQualifiedTypeName name="expression.Variable"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.iiitb.helper.SwitchHelper"/>
 <fullyQualifiedTypeName name="expression.GreaterThanExpression"/>
@@ -47,7 +45,6 @@
 <fullyQualifiedTypeName name="com.iiitb.blocks.Constant"/>
 <fullyQualifiedTypeName name="com.iiitb.blocks.Sum"/>
 <fullyQualifiedTypeName name="expression.Expression"/>
-<fullyQualifiedTypeName name="com.iiitb.utility.ParseXML"/>
 <fullyQualifiedTypeName name="com.iiitb.helper.InPortHelper"/>
 <fullyQualifiedTypeName name="com.iiitb.blocks.InPort"/>
 <fullyQualifiedTypeName name="expression.EqualsExpression"/>
@@ -60,4 +57,7 @@
 <fullyQualifiedTypeName name="com.iiitb.utility.DestNode"/>
 <fullyQualifiedTypeName name="com.iiitb.blocks.Switch"/>
 <fullyQualifiedTypeName name="expression.EqualsRelationalExpression"/>
+<fullyQualifiedTypeName name="com.iiitb.utility.ParseXML"/>
+<fullyQualifiedTypeName name="javax.swing.JFrame"/>
+<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 </qualifiedTypeNameHistroy>

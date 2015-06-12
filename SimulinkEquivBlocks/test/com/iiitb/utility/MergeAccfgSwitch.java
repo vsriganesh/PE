@@ -156,6 +156,8 @@ public class MergeAccfgSwitch {
 					
 					fpList.addAll(block.getAccfg().getFp());
 					initList.addAll(block.getAccfg().getInit());
+					if(!sortFp.startsWith(Constants.DELAY))
+						delayList.addAll(block.getAccfg().getDelay());
 					/*For Delay block with delay_length >1 , first individual delay components
 					 * are added to delayList*/
 					if(sortFp.startsWith(Constants.DELAY))

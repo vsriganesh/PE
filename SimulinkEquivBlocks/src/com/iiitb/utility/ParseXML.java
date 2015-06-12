@@ -198,7 +198,7 @@ public class ParseXML {
 						}
 
 						Accfg accfg = parseDocument(doc, blockType);
-
+						countSubSystem--;
 						Block block = BlockFactory.generateBlock(blockName,
 								accfg);
 						if (block != null)

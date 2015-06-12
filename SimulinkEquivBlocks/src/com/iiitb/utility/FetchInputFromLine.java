@@ -65,7 +65,7 @@ public class FetchInputFromLine {
 									// destNode =
 									// branchChildren.item(brTemp).getTextContent();
 									node.setName(branchChildren.item(brTemp)
-											.getTextContent());
+											.getTextContent()+"_SubSystem_"+ParseXML.countSubSystem);
 									destNodeTemp.add(node);
 								}
 
@@ -100,7 +100,7 @@ public class FetchInputFromLine {
 						if (temp.item(tempIter).getNodeValue()
 								.equalsIgnoreCase("SrcBlock")) {
 
-							sourceNode = attributes.item(iter).getTextContent();
+							sourceNode = attributes.item(iter).getTextContent()+"_SubSystem_"+ParseXML.countSubSystem;
 
 						}
 
@@ -108,7 +108,7 @@ public class FetchInputFromLine {
 								.equalsIgnoreCase("DstBlock")) {
 
 							nodeIni.setName(attributes.item(iter)
-									.getTextContent());
+									.getTextContent()+"_SubSystem_"+ParseXML.countSubSystem);
 							destNodeTemp.add(nodeIni);
 
 						}
@@ -382,7 +382,7 @@ public class FetchInputFromLine {
 						if (temp.item(tempIter).getNodeValue()
 								.equalsIgnoreCase("SrcBlock")) {
 
-							sourceNode = attributes.item(iter).getTextContent();
+							sourceNode = attributes.item(iter).getTextContent()+"_SubSystem_"+(ParseXML.countSubSystem-1);
 							
 						
 

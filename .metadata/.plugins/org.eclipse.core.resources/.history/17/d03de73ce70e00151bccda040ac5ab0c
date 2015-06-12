@@ -1,0 +1,95 @@
+package com.iiitb.cfg;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import expression.Expression;
+
+public class Accfg {
+
+	private List<Expression> init = new ArrayList<Expression>();
+	private List<Expression> input = new ArrayList<Expression>();
+	private List<Expression> output = new ArrayList<Expression>();
+
+	private List<Expression> fp = new ArrayList<Expression>();
+	private List<Expression> delay = new ArrayList<Expression>();
+	
+	
+	
+	
+	public List<Expression> getInit() {
+		return init;
+	}
+
+	public void setInit(List<Expression> init) {
+		this.init = init;
+	}
+
+	public List<Expression> getInput() {
+		return input;
+	}
+
+	public void setInput(List<Expression> input) {
+		this.input = input;
+	}
+
+	public List<Expression> getOutput() {
+		return output;
+	}
+
+	public void setOutput(List<Expression> output) {
+		this.output = output;
+	}
+
+	public List<Expression> getFp() {
+		return fp;
+	}
+
+	public void setFp(List<Expression> fp) {
+		this.fp = fp;
+	}
+	
+	@Override
+	public String toString()
+	{
+		 StringBuffer toRetTemp= new StringBuffer("ACCFG :");
+		 toRetTemp.append("\n");
+		 toRetTemp.append("Init : " + getInit());
+		 toRetTemp.append("\n");
+		 toRetTemp.append("Input : " + getInput());
+		 toRetTemp.append("\n");
+		 toRetTemp.append("Output : " + getOutput());
+		 toRetTemp.append("\n");
+		 toRetTemp.append("FP List : \n\n");
+		 Iterator<Expression> fpIter = getFp().iterator();
+		int i =0;
+		 while(fpIter.hasNext())
+		 {
+				if(i%2 == 0)
+					toRetTemp.append("\t");
+			 toRetTemp.append(fpIter.next());
+		
+			 toRetTemp.append("\n");
+			 i++;
+		 }
+		 
+		 toRetTemp.append("\n");
+		 toRetTemp.append("Delay : " + getDelay().toString());
+		 return toRetTemp.toString();
+		 
+		
+	}
+
+	public List<Expression> getDelay() {
+		return delay;
+	}
+
+	public void setDelay(List<Expression> delay) {
+		this.delay = delay;
+	}
+	
+	
+	
+
+}
